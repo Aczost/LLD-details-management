@@ -1,16 +1,15 @@
 module.exports = function makeGetDetailsAction({ getDetails }) {
     return async function getDetailsAction({ req, res }) {
-        let displayData = await getDetails({});
-        if (displayData) {
+        try {
+            let displayData = await getDetails({});
             return res.status(200).json({
                 status: "Fetched succesfully",
                 data: displayData,
             });
-        }
-        else {
+        } catch (error) {
             return res.status(404).json({
                 status: "fail",
-                message: "Details not found",
+                message: error,
             });
         }
     }
