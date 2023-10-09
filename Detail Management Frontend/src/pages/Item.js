@@ -79,7 +79,7 @@ function CustomTable() {
         </Button>
       ),
     },
-  ], []);
+  ], [handleDeleteRow]); // TODO: Remove the handleDeleteRow 
 
   const columnDefsOwnerFalse = useMemo(() => [
     {
