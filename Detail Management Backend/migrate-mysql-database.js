@@ -8,11 +8,16 @@ let database = config.mysql.database
 let username = config.mysql.username
 let password = config.mysql.password
 
+const dialectOptions={
+    multipleStatements: true,
+    decimalNumbers: true,
+};
+
 const sequelize = new Sequelize(database, username, password, {
     dialect : config.mysql.dialect,
     port :config.mysql.port,
     host : config.mysql.host,
-    dialectOptions : config.mysql.dialectOptions,
+    dialectOptions : dialectOptions,
 });
 console.log(ROOT_PATH);
 const umzug = new Umzug({
