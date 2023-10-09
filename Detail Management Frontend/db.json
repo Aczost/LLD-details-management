@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "dnd":true,
+      "id": 1,
+      "name": "Item 1"
+    },
+    {
+      "dnd":true,
+      "id": 2,
+      "name": "Item 2"
+    },
+    {
+      "dnd":true,
+      "id": 3,
+      "name": "Item 3"
+    }
+  ]
+}
