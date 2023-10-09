@@ -31,7 +31,7 @@ function CustomTable() {
     getDetails(); // Fetch data initially
     const intervalId = setInterval(() => {
       getDetails(); // Fetch data every 2 minutes
-    }, 120000);
+    }, 3000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -79,7 +79,7 @@ function CustomTable() {
         </Button>
       ),
     },
-  ], [handleDeleteRow]); // TODO: Remove the handleDeleteRow 
+  ], []);
 
   const columnDefsOwnerFalse = useMemo(() => [
     {
