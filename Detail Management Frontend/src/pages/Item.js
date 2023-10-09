@@ -31,7 +31,7 @@ function CustomTable() {
     getDetails(); // Fetch data initially
     const intervalId = setInterval(() => {
       getDetails(); // Fetch data every 2 minutes
-    }, 3000);
+    }, 120000);
     return () => clearInterval(intervalId);
   }, []);
 
