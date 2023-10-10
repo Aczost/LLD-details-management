@@ -7,5 +7,12 @@ const config = {
         "dialect": "mysql",
         "port": "3306"
     }
+    // "mysql": {
+    //     "username": "root",
+    //     "password": "root",
+    //     "database": "details_management",
+    //     "host": "127.0.0.1",
+    //     "dialect": "mysql"
+    // }
 }
 module.exports = config;   

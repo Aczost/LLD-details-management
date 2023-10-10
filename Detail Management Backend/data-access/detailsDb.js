@@ -5,7 +5,7 @@ module.exports = function userdata({ mysql, pool }) {
         upateDetailsInDataBase,
         deleteDetailsInDataBase,
         getLastDetailsFromDataBase,
-        // addDetailsInBulkInDataBase,
+        updateIfTaskCompletedInDataBase,
         deleteAllDetailsFromDataBase,
     });
 
@@ -36,6 +36,11 @@ module.exports = function userdata({ mysql, pool }) {
         queryString += `updatedAt = ? WHERE id = ? `
         valuesArray.push(new Date(), id)
         const result = await mysql.execute(queryString, valuesArray);
+        return result;
+    }
+
+    async function updateIfTaskCompletedInDataBase({id, status}){
+        const result = await mysql.execute(`UPDATE detailsManagement SET isCompleted = ? WHERE id = ?`, [status, id])
         return result;
     }
 

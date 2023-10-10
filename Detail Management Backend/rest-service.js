@@ -3,7 +3,8 @@ const {
     addDetailsAction,
     updateDetailsAction,
     deleteDetailsAction,
-    addDetailsInBulkAction
+    addDetailsInBulkAction,
+    updateIfTaskCompletedAction,
 } = require('./controller')
 const express = require('express');
 const router = express.Router();
@@ -27,6 +28,10 @@ router.delete('/delete-details/:id', (req, res)=>{
 
 router.post('/bulk-insert-details', (req, res)=>{
     addDetailsInBulkAction({req, res})
+})
+
+router.put('/task-status/:id', (req, res)=>{
+    updateIfTaskCompletedAction({req, res});
 })
 
 module.exports = {router}

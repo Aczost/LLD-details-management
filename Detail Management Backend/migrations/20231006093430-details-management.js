@@ -18,6 +18,11 @@ async function up({ context: queryInterface }) {
       type: Sequelize.DataTypes.STRING,
       allowNull: false
     },
+    isCompleted: {
+      type: Sequelize.DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     createdAt: {
       type: Sequelize.DataTypes.DATE,
       allowNull: false

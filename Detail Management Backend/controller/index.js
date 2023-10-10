@@ -16,10 +16,14 @@ const deleteDetailsAction = makeDeleteDetailsAction({Joi, deleteDetails: useCase
 const makeAddDetailsInBulkAction = require('./add-details-in-bulk-action');
 const addDetailsInBulkAction = makeAddDetailsInBulkAction({addDetailsInBulk: useCases.addDetailsInBulk})
 
+const makeUpdateIfTaskCompletedAction = require('./update-if-task-completed');
+const updateIfTaskCompletedAction = makeUpdateIfTaskCompletedAction({updateIfTaskCompleted: useCases.updateIfTaskCompleted})
+
 module.exports = Object.freeze({
     getDetailsAction,
     addDetailsAction,
     updateDetailsAction,
     deleteDetailsAction,
-    addDetailsInBulkAction
+    addDetailsInBulkAction,
+    updateIfTaskCompletedAction,
 })

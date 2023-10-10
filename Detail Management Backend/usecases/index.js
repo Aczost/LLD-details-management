@@ -16,10 +16,14 @@ const deleteDetails = makeDeleteDetails({detailsDb});
 const makeAddDetailsInBulk = require('./add-details-in-bulk')
 const addDetailsInBulk = makeAddDetailsInBulk({detailsDb})
 
+const makeUpdateIfTaskCompleted = require('./update-if-task-completed')
+const updateIfTaskCompleted = makeUpdateIfTaskCompleted({detailsDb});
+
 module.exports = Object.freeze({
     getDetails,
     addDetails,
     updateDetails,
     deleteDetails,
     addDetailsInBulk,
+    updateIfTaskCompleted,
 })
