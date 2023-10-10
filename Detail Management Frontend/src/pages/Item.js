@@ -31,7 +31,7 @@ function CustomTable() {
     getDetails(); // Fetch data initially
     const intervalId = setInterval(() => {
       getDetails(); // Fetch data every 2 minutes
-    }, 120000);
+    }, 60000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -144,7 +144,7 @@ function CustomTable() {
       />
       <div
         className="ag-theme-alpine custom-ag-grid"
-        style={{height: 400, width: 850, textAlign: "left"}}
+        // style={{height: 400, width: 850, textAlign: "left"}}
       >
         <AgGridReact
           rowData={rowData}
@@ -156,6 +156,8 @@ function CustomTable() {
           rowSelection="multiple"
           onCellValueChanged={handleCellValueChanged}
           onRowDragEnd={handleRowDragEnd}
+          alwaysShowHorizontalScroll={true}
+          alwaysShowVerticalScroll={true}
         />
       </div>
     </div>

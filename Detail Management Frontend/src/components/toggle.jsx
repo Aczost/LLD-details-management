@@ -10,11 +10,9 @@ const Toggle = ({setOwner}) => {
 		setTimeout(() => {
 			if (PASSWORD === password) {
 				setOwner(true);
-				// message.success('Success!! 👍');
-				message.success("Details daal chhake!! 🫡");
+				message.success('Success!! 👍');
 			} else {
-				message.error("Wrong password!! 🖕");
-				// message.error("Wrong password!! 👎");
+				message.error("Wrong password!! 👎");
 			}
 		}, 1100);
 		setPasswords("");

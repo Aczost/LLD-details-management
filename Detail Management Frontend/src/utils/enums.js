@@ -7,7 +7,7 @@ const STATISTICS_API = {
   DELETE_DETAILS : `${API_ENDPOINT}/delete-details`,
   BULKINSERT_DETAILS : `${API_ENDPOINT}/bulk-insert-details`,
 };
-export const PASSWORD = '12';
+export const PASSWORD = '820987';
 export const API_ROUTES = {
   ...STATISTICS_API,
 };
