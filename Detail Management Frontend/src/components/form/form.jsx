@@ -1,20 +1,28 @@
 import React from "react";
-import { Form, Input, Button, message as Message, Row, Col } from "antd";
-import { UserOutlined, MessageOutlined } from "@ant-design/icons";
-import { handleCreateDetail } from "../api/details-managment-api";
+import {Form, Input, Button, message as Message, Row, Col} from "antd";
+import {UserOutlined, MessageOutlined} from "@ant-design/icons";
+import {handleCreateDetail, handleGetDetails} from "../../api/details-managment-api";
 import "./form.css";
-import Toggle from "./toggle";
+import {useAppStore} from "../../store/store";
 
-const { TextArea } = Input;
+const {TextArea} = Input;
 
-const ContactForm = ({ getDetails, owner, setOwner }) => {
+const ContactForm = () => {
+	const {setRowData} = useAppStore();
 	const [form] = Form.useForm();
+
+	const getDetails = async () => {
+		try {
+			const {data} = await handleGetDetails();
+			setRowData(data.data);
+		} catch (err) {}
+	};
 
 	const onFinishCreate = () => {
 		form
 			.validateFields()
 			.then(async (values) => {
-				const { name, message } = values;
+				const {name, message} = values;
 				if (name && message) {
 					const newRow = {
 						description: message,
@@ -35,15 +43,12 @@ const ContactForm = ({ getDetails, owner, setOwner }) => {
 
 	return (
 		<div className="container-form">
-			{owner && (
-				<div
-					className="contact-form-container"
-				>
+				<div className="contact-form-container">
 					<Form
 						form={form}
 						name="contact-form"
 						layout="vertical"
-						initialValues={{ name: "", message: "" }}
+						initialValues={{name: "", message: ""}}
 					>
 						<Form.Item
 							name="name"
@@ -93,10 +98,6 @@ const ContactForm = ({ getDetails, owner, setOwner }) => {
 						</Row>
 					</Form>
 				</div>
-			)}
-			<div className="owner-switch">
-				<Toggle setOwner={setOwner} />
-			</div>
 		</div>
 	);
 };

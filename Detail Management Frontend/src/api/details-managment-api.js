@@ -25,4 +25,8 @@ const handleDragDrop = async (data) => {
   return response;
 }
 
-export {handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop}
+const handleTaskStatus = async (data, id) => {
+  const response = await axios.put(`${API_ROUTES.UPDATE_TASK_STATUS}/${id}`, data);
+  return response;
+}
+export {handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus}

@@ -1,20 +1,26 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {Button, Modal, Input, message} from "antd";
-import {PASSWORD} from "../utils/enums";
+import {PASSWORD} from "../../utils/enums";
+import {useNavigate} from "react-router-dom";
 
-const Toggle = ({setOwner}) => {
+const Toggle = () => {
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [password, setPasswords] = useState("");
+
+	const inputRef = useRef(null);
+
 	const handleOk = () => {
 		setTimeout(() => {
 			if (PASSWORD === password) {
-				setOwner(true);
-				message.success('Success!! 👍');
+				navigate("/owners");
+				message.success("Success!! 👍");
 			} else {
 				message.error("Wrong password!! 👎");
 			}
 		}, 1100);
+
 		setPasswords("");
 		setConfirmLoading(true);
 		setTimeout(() => {
@@ -28,8 +34,14 @@ const Toggle = ({setOwner}) => {
 	};
 	const showModal = () => {
 		setOpen(true);
+
+		if (inputRef) {
+			setTimeout(() => {
+				inputRef?.current?.focus();
+			}, 100);
+		}
 	};
-	
+
 	return (
 		<>
 			<Button type="primary" onClick={showModal}>
@@ -46,6 +58,8 @@ const Toggle = ({setOwner}) => {
 					type="password"
 					onChange={(e) => setPasswords(e.target.value)}
 					value={password}
+					ref={inputRef}
+					autoFocus={true}
 				/>
 			</Modal>
 		</>
