@@ -8,7 +8,7 @@ const STATISTICS_API = {
   BULKINSERT_DETAILS : `${API_ENDPOINT}/bulk-insert-details`,
   UPDATE_TASK_STATUS: `${API_ENDPOINT}/task-status`,
 };
-export const PASSWORD = '12';
+export const PASSWORD = '820987';
 export const API_ROUTES = {
   ...STATISTICS_API,
 };
