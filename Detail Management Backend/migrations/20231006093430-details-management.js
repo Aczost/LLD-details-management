@@ -24,11 +24,11 @@ async function up({ context: queryInterface }) {
       defaultValue: false,
     },
     createdAt: {
-      type: Sequelize.DataTypes.DATE,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false
     },
     updatedAt: {
-      type: Sequelize.DataTypes.DATE,
+      type: Sequelize.DataTypes.STRING,
     }
   })
 }

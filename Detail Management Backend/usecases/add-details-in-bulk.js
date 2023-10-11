@@ -7,6 +7,8 @@ module.exports = function makeAddDetailsInBulk({ detailsDb }) {
                 const result = await detailsDb.createDetailsInDataBase({
                     name: item.name,
                     description:item.description,
+                    isCompleted:item.isCompleted,
+                    createdAt: item.createdAt,
                 });
                 resultArr.push(result)
             }
