@@ -52,31 +52,31 @@ const ContactForm = () => {
 					>
 						<Form.Item
 							name="name"
-							label="Name"
+							label="Party"
 							rules={[
 								{
 									required: true,
-									message: "Please enter your name!",
+									message: "Please enter your party name!",
 								},
 							]}
 						>
-							<Input prefix={<UserOutlined />} placeholder="Your Name" />
+							<Input placeholder="Party Name" />
 						</Form.Item>
 
 						<Form.Item
 							name="message"
-							label="Message"
+							label="Job"
 							rules={[
 								{
 									required: true,
-									message: "Please enter your message!",
+									message: "Please enter your job description!",
 								},
 							]}
 						>
 							<TextArea
 								rows={4}
 								prefix={<MessageOutlined />}
-								placeholder="Your Message"
+								placeholder="Your job description"
 							/>
 						</Form.Item>
 
