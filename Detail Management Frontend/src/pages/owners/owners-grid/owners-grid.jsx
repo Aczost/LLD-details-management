@@ -43,7 +43,7 @@ const OwnersGrid = () => {
 				field: "",
 				headerName: "",
 				rowDrag: true,
-				flex: 0.2,
+				flex: 0.1,
 			},
 			{
 				field: "isCompleted",
@@ -55,15 +55,14 @@ const OwnersGrid = () => {
 						onClick={() => handleInputChange(val)}
 					/>
 				),
-				flex: 0.4  ,
+				flex: 0.3,
 			},
 			{
 				field: "name",
 				filter: "agTextColumnFilter",
 				headerName: "PARTY",
 				editable: true,
-				flex: 0.5  ,
-        
+				flex: 0.5,
 			},
 			{
 				field: "description",
@@ -72,6 +71,27 @@ const OwnersGrid = () => {
 				editable: true,
 				resizable: true,
 				flex: 1.5,
+			},
+			{
+				field: "createdAt",
+				headerName: "CREATED ON",
+				filter: "agTextColumnFilter",
+				flex: 0.5,
+				cellRenderer: (val) => {
+					const date = 
+						new Date(val.value).toLocaleString(undefined, {
+							timeZone: "Asia/Kolkata",
+							weekday: "long",
+							year: "numeric",
+							month: "numeric",
+							day: "numeric",
+							hour: "numeric",
+							minute: "numeric",
+							second: "numeric",
+							hour12: true,
+						});
+					return date;
+				},
 			},
 			{
 				field: "",
@@ -85,8 +105,8 @@ const OwnersGrid = () => {
 						cancelText="No"
 					>
 						<Button
-							type="primary" 
-              danger
+							type="primary"
+							danger
 							style={{
 								width: "100%",
 							}}
@@ -95,7 +115,7 @@ const OwnersGrid = () => {
 						</Button>
 					</Popconfirm>
 				),
-        flex: 0.4
+				flex: 0.2,
 			},
 		],
 		[]

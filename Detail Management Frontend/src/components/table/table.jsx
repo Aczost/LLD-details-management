@@ -16,7 +16,7 @@ const AgGridTable = ({columnDefs}) => {
 		defaultColDef,
 	} = useTableController();
 	return (
-		<div className="ag-theme-alpine custom-ag-grid" style={{width:"80%"}}>
+		<div className="ag-theme-alpine custom-ag-grid" style={{width:"100%"}}>
 			<AgGridReact
 				rowData={rowData}
 				columnDefs={columnDefs}
