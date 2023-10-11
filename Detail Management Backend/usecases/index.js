@@ -1,5 +1,5 @@
 global.logger = console.log;
-const moment = require('moment');
+const moment = require('moment-timezone');
 const {detailsDb} = require('../data-access')
 
 const makeGetDetails = require('./get-details.js')
