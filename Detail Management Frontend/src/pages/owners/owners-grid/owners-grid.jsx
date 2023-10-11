@@ -77,21 +77,6 @@ const OwnersGrid = () => {
 				headerName: "CREATED ON",
 				filter: "agTextColumnFilter",
 				flex: 0.5,
-				cellRenderer: (val) => {
-					const date = 
-						new Date(val.value).toLocaleString(undefined, {
-							timeZone: "Asia/Kolkata",
-							weekday: "long",
-							year: "numeric",
-							month: "numeric",
-							day: "numeric",
-							hour: "numeric",
-							minute: "numeric",
-							second: "numeric",
-							hour12: true,
-						});
-					return date;
-				},
 			},
 			{
 				field: "",

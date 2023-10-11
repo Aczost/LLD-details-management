@@ -1,11 +1,12 @@
 global.logger = console.log;
+const moment = require('moment');
 const {detailsDb} = require('../data-access')
 
 const makeGetDetails = require('./get-details.js')
 const getDetails = makeGetDetails({detailsDb});
 
 const makeAddDetails = require('./add-details.js')
-const addDetails = makeAddDetails({detailsDb});
+const addDetails = makeAddDetails({detailsDb, moment});
 
 const makeUpdateDetails = require('./update-details.js')
 const updateDetails = makeUpdateDetails({detailsDb});
