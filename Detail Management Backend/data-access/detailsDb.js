@@ -10,9 +10,12 @@ module.exports = function userdata({ mysql, pool }) {
     });
 
     async function createDetailsInDataBase({ name, description, isCompleted, createdAt}) {
+        if(!isCompleted){
+            isCompleted = false;
+        }
         const result = await mysql.execute(`
         INSERT INTO detailsManagement ( name, description, isCompleted, createdAt) VALUES (?, ?, ?, ?)`,
-            [name, description, isCompleted, createdAt]
+            [name, description, isCompleted , createdAt]
         );
         return result;
     }
