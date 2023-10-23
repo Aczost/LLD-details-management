@@ -21,7 +21,7 @@ export const DYNAMICOPTIONS = {
   CREASING: ['Vivek', 'Parag', 'Manoj', 'Vicky', 'Mahindra', 'Raju', 'Shatru', 'Nikul', 'Dhruvanshu']
 }
 export const PARTY = ['LPP'];
-export const PERSONS = ['NAME1', "NAME2"]
+export const CREATEDBY = ['Dhruvanshu', "Praful"]
 export const PLYWOOD = ['18mm', '18mm  Birch', '15mm']
 export const CUTTING = ['Black Cat (23.80mm) CB', 'Black Cat (23.80mm) LCB', 'Juho (23.80mm) CB', 'Juho (23.80mm) LCB', 'Bohmer (23.80mm) CB', 'Bohmer (23.80mm) LCB', 'Aitches (23.80mm) CB']
 export const CREASING = ['Sigma (23.25mm)', 'Bohmer (23.25mm)', 'Juho (23.25mm)', 'Juho (23.30mm)', 'DTL (23.25mm)' ]

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useAppStore} from "../../store/store";
 import {Form, Input, Select, Button, message as Message} from "antd";
 import {handleCreateDetail, handleGetDetails} from "../../api/details-managment-api";
-import { PARTY, PERSONS, PLYWOOD, CUTTING, CREASING } from "../../utils/enums";
+import { PARTY, CREATEDBY, PLYWOOD, CUTTING, CREASING } from "../../utils/enums";
 import "./form.css";
 
 const {Option} = Select;
@@ -62,7 +62,7 @@ const ContactForm = () => {
       >
         <Select style={{width: "190px"}} placeholder="Select job creator name">
           {
-            PERSONS.map((person, index) => (
+            CREATEDBY.map((person, index) => (
               <Option key={index} value={person}>
                 {person}
               </Option>
