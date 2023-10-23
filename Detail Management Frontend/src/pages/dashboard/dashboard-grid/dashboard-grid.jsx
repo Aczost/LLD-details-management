@@ -77,7 +77,7 @@ const DashboardGrid = () => {
     if (clickedCellData.startedAt) {
       const data = {};
       if (
-        !(clickedCellData[`${prefix.toLowerCase()}StartedAt`]) &&
+        !clickedCellData[`${prefix.toLowerCase()}StartedAt`] &&
         moduleStartValue.length > 0
       ) {
         data[`${prefix.toLowerCase()}By`] = moduleStartValue;
@@ -97,7 +97,7 @@ const DashboardGrid = () => {
         setIsModalOpen(false);
         setModuleStartValue("");
       } else {
-        message.error("Please select a value:-");
+        message.error(`Please select ${prefix.toLowerCase()} by`);
       }
       await updateJobDetails(data, clickedCellData.id);
       await getDetails();
@@ -117,30 +117,26 @@ const DashboardGrid = () => {
         onCancel={handleCancel}
         footer={(_, {CancelBtn}) => (
           <>
-            {!(clickedCellData[`${prefix.toLowerCase()}StartedAt`]) ? (
+            {!clickedCellData[`${prefix.toLowerCase()}StartedAt`] ? (
               <Button type="primary" onClick={onFinish}>
-              Start
-            </Button>
-            ) : !(clickedCellData[`${prefix.toLowerCase()}EndedAt`]) ? (
-              <Button
-                  type="primary"
-                  danger
-                  onClick={onFinish}
-                >
-                  End
-                </Button>
+                Start
+              </Button>
+            ) : !clickedCellData[`${prefix.toLowerCase()}EndedAt`] ? (
+              <Button type="primary" danger onClick={onFinish}>
+                End
+              </Button>
             ) : (
               <Button
-                  type="primary"
-                  disabled
-                  style={{
-                    backgroundColor: "#4CBB17",
-                    color: "white",
-                    border: "none",
-                  }}
-                >
-                  Completed
-                </Button>
+                type="primary"
+                disabled
+                style={{
+                  backgroundColor: "#4CBB17",
+                  color: "white",
+                  border: "none",
+                }}
+              >
+                Completed
+              </Button>
             )}
             <CancelBtn />
           </>
@@ -148,7 +144,11 @@ const DashboardGrid = () => {
       >
         <hr style={{marginBottom: "20px"}} />
         <Form form={form} name="myForm" onFinish={onFinish}>
-          <Form.Item name="columnHeaderName" label={`${columnHeaderName}: `}>
+          <Form.Item
+            name="columnHeaderName"
+            label={`${columnHeaderName}: `}
+            rules={[{required: true}]}
+          >
             <Select
               placeholder={`SELECT ${prefix} BY`}
               onSelect={(val) => {
