@@ -1,24 +1,27 @@
 global.logger = console.log;
 const moment = require('moment-timezone');
-const {detailsDb} = require('../data-access')
+const { detailsDb } = require('../data-access')
 
 const makeGetDetails = require('./get-details.js')
-const getDetails = makeGetDetails({detailsDb});
+const getDetails = makeGetDetails({ detailsDb });
 
 const makeAddDetails = require('./add-details.js')
-const addDetails = makeAddDetails({detailsDb, moment});
+const addDetails = makeAddDetails({ detailsDb, moment });
 
 const makeUpdateDetails = require('./update-details.js')
-const updateDetails = makeUpdateDetails({detailsDb});
+const updateDetails = makeUpdateDetails({ detailsDb });
 
 const makeDeleteDetails = require('./delete-details.js')
-const deleteDetails = makeDeleteDetails({detailsDb});
+const deleteDetails = makeDeleteDetails({ detailsDb });
 
 const makeAddDetailsInBulk = require('./add-details-in-bulk')
-const addDetailsInBulk = makeAddDetailsInBulk({detailsDb})
+const addDetailsInBulk = makeAddDetailsInBulk({ detailsDb })
 
 const makeUpdateIfTaskCompleted = require('./update-if-task-completed')
-const updateIfTaskCompleted = makeUpdateIfTaskCompleted({detailsDb});
+const updateIfTaskCompleted = makeUpdateIfTaskCompleted({ detailsDb });
+
+const makeUpdateJobDetails = require('./update-if-job-start-or-end');
+const updateJobDetails = makeUpdateJobDetails({ detailsDb });
 
 module.exports = Object.freeze({
     getDetails,
@@ -27,4 +30,5 @@ module.exports = Object.freeze({
     deleteDetails,
     addDetailsInBulk,
     updateIfTaskCompleted,
+    updateJobDetails
 })

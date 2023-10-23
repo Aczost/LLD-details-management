@@ -4,12 +4,18 @@ module.exports = function makeAddDetailsInBulk({ detailsDb }) {
             const resultArr = []
             await detailsDb.deleteAllDetailsFromDataBase({})
             for (let item of arrayToInsert){
-                const result = await detailsDb.createDetailsInDataBase({
+                let createObj = {
                     name: item.name,
                     description:item.description,
                     isCompleted:item.isCompleted,
                     createdAt: item.createdAt,
-                });
+                    duration: item.duration,
+                    endedAt: item.endedAt,
+                    inProcess: item.inProcess,
+                    pickedBy: item.pickedBy,
+                    startedAt: item.startedAt,
+                }
+                const result = await detailsDb.createBulkDetailsInDataBase({createObj});
                 resultArr.push(result)
             }
             if(resultArr.length){

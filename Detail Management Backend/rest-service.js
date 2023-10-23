@@ -5,6 +5,8 @@ const {
     deleteDetailsAction,
     addDetailsInBulkAction,
     updateIfTaskCompletedAction,
+    updateIfJobStartOrEndAction
+    
 } = require('./controller')
 const express = require('express');
 const router = express.Router();
@@ -32,6 +34,10 @@ router.post('/bulk-insert-details', (req, res)=>{
 
 router.put('/task-status/:id', (req, res)=>{
     updateIfTaskCompletedAction({req, res});
+})
+
+router.put('/task-picked-status/:id', (req, res)=>{
+    updateIfJobStartOrEndAction({req, res});
 })
 
 module.exports = {router}

@@ -1,8 +1,8 @@
 module.exports = function makeAddDetailsAction({addDetails}){
     return async function addDetailsAction({req, res}){
         try {
-            let {name, description} = req.body
-            const details = await addDetails({name, description})
+            let {name, createdBy, description, cutting, creasing, plywood} = req.body
+            const details = await addDetails({name, createdBy, description, cutting, creasing, plywood})
             if(details){
                 return res.status(200).json({
                     status: "Added succesfully",

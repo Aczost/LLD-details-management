@@ -19,6 +19,9 @@ const addDetailsInBulkAction = makeAddDetailsInBulkAction({addDetailsInBulk: use
 const makeUpdateIfTaskCompletedAction = require('./update-if-task-completed');
 const updateIfTaskCompletedAction = makeUpdateIfTaskCompletedAction({updateIfTaskCompleted: useCases.updateIfTaskCompleted})
 
+const makeUpdateIfJobStartOrEndAction = require('./update-if-job-start-or-end');
+const updateIfJobStartOrEndAction = makeUpdateIfJobStartOrEndAction({updateJobDetails: useCases.updateJobDetails})
+
 module.exports = Object.freeze({
     getDetailsAction,
     addDetailsAction,
@@ -26,4 +29,5 @@ module.exports = Object.freeze({
     deleteDetailsAction,
     addDetailsInBulkAction,
     updateIfTaskCompletedAction,
+    updateIfJobStartOrEndAction
 })
