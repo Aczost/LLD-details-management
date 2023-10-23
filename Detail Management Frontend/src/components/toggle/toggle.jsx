@@ -4,12 +4,12 @@ import {PASSWORD} from "../../utils/enums";
 import {useNavigate} from "react-router-dom";
 
 const Toggle = () => {
-	const navigate = useNavigate();
+
 	const [open, setOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [password, setPasswords] = useState("");
-
 	const inputRef = useRef(null);
+	const navigate = useNavigate();
 
 	const handleOk = () => {
 		setTimeout(() => {
@@ -20,7 +20,6 @@ const Toggle = () => {
 				message.error("Wrong password!! 👎");
 			}
 		}, 1100);
-
 		setPasswords("");
 		setConfirmLoading(true);
 		setTimeout(() => {
@@ -32,9 +31,9 @@ const Toggle = () => {
 	const handleCancel = () => {
 		setOpen(false);
 	};
+
 	const showModal = () => {
 		setOpen(true);
-
 		if (inputRef) {
 			setTimeout(() => {
 				inputRef?.current?.focus();
@@ -56,13 +55,20 @@ const Toggle = () => {
 			>
 				<Input
 					type="password"
-					onChange={(e) => setPasswords(e.target.value)}
+					onChange={(e) => {
+						setPasswords(e.target.value)
+					}}
 					value={password}
 					ref={inputRef}
 					autoFocus={true}
+					onKeyUp={(e)=>{
+						if(e.key == 'Enter') {
+							handleOk();
+					}
+					}}
 				/>
 			</Modal>
-		</>
+		</>	
 	);
 };
 

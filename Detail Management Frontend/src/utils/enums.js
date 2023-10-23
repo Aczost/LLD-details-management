@@ -8,8 +8,23 @@ const STATISTICS_API = {
   DELETE_DETAILS : `${API_ENDPOINT}/delete-details`,
   BULKINSERT_DETAILS : `${API_ENDPOINT}/bulk-insert-details`,
   UPDATE_TASK_STATUS: `${API_ENDPOINT}/task-status`,
+  UPDATE_START_END_DURATION: `${API_ENDPOINT}/task-picked-status`
 };
 export const PASSWORD = '820987';
+
+export const DYNAMICOPTIONS = {
+  DESIGN: ["Praful", "Dhruvanshu"],
+  LASER: ['Vicky', 'Mahindra', 'Dhruvanshu'],
+  BENDER: ['Mahindra', 'Manoj', 'Vicky', 'Dhruvanshu',],
+  DELIVER: ['Vinod', 'Bhola Kaka', 'Vivek', 'Dhruvanshu'],
+  FITTING: ['Raju', 'Shatru', 'Nikul', 'Vicky', 'Dhruvanshu'],
+  CREASING: ['Vivek', 'Parag', 'Manoj', 'Vicky', 'Mahindra', 'Raju', 'Shatru', 'Nikul', 'Dhruvanshu']
+}
+export const PARTY = ['LPP'];
+export const PERSONS = ['NAME1', "NAME2"]
+export const PLYWOOD = ['18mm', '18mm  Birch', '15mm']
+export const CUTTING = ['Black Cat (23.80mm) CB', 'Black Cat (23.80mm) LCB', 'Juho (23.80mm) CB', 'Juho (23.80mm) LCB', 'Bohmer (23.80mm) CB', 'Bohmer (23.80mm) LCB', 'Aitches (23.80mm) CB']
+export const CREASING = ['Sigma (23.25mm)', 'Bohmer (23.25mm)', 'Juho (23.25mm)', 'Juho (23.30mm)', 'DTL (23.25mm)' ]
 export const API_ROUTES = {
   ...STATISTICS_API,
 };

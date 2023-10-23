@@ -5,7 +5,9 @@ import ContactForm from "../../components/form/form";
 function Owners() {
   return (
     <div className="container">
-      <ContactForm />
+      <div style={{display:"flex", justifyContent:"center", width:"100%"}}>
+        <ContactForm />
+      </div>
       <OwnersGrid />
     </div>
   );

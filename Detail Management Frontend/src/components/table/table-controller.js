@@ -9,7 +9,7 @@ import {
 import {useAppStore} from "../../store/store";
 
 const useTableController = () => {
-  const {setRowData} = useAppStore()
+  const {setRowData, owner ,setIsModalOpen, setClickedCellData, setColumnHeaderName, setDefaultValue} = useAppStore()
   const gridApiRef = useRef(null);
   useEffect(() => {
     getDetails(); // Fetch data initially
@@ -31,9 +31,11 @@ const useTableController = () => {
     () => ({
       sortable: true,
       filter: true,
+      // floatingFilter: true,
       enableRowGroup: true,
       cellStyle: {textAlign: "left"},
-      flex: 1,
+      resizable: true,
+      // flex: 1,
       
     }),
     []
@@ -43,18 +45,18 @@ const useTableController = () => {
     gridApiRef.current = params.api;
   };
 
-  const handleCellValueChanged = async (event) => {
-    const data = {
-      name: event.data.name,
-      description: event.data.description,
-    };
-    try {
-      await handleEditDetail(data, event.data.id);
-      await getDetails();
-      message.success("Edited Successfully.");
-    } catch (error) {
-    }
-  };
+  // const handleCellValueChanged = async (event) => {
+  //   const data = {
+  //     name: event.data.name,
+  //     description: event.data.description,
+  //   };
+  //   try {
+  //     await handleEditDetail(data, event.data.id);
+  //     await getDetails();
+  //     message.success("Edited Successfully.");
+  //   } catch (error) {
+  //   }
+  // };
 
   const handleRowDragEnd = async (event) => {
     const updatedData = event.api.getModel().rowsToDisplay.map((row) => row.data);
@@ -64,11 +66,28 @@ const useTableController = () => {
     } catch (error) {
     }
   };
+
+  const onCellClicked = async (event) => {
+    setDefaultValue("")
+    setIsModalOpen(false);
+    if( event.colDef.headerName === "DESIGN BY" || event.colDef.headerName === "LASER BY"  ||event.colDef.headerName === "BENDER BY" || event.colDef.headerName === "FITTING BY" || event.colDef.headerName === "CREASING BY") {
+      setColumnHeaderName(event.colDef.headerName)
+      setClickedCellData(event.data);
+      setIsModalOpen(true)
+    }
+    if((event.colDef.headerName === "PARTY"|| event.colDef.headerName === "JOB" || event.colDef.headerName === "CUTTING" || event.colDef.headerName === "CREASING" || event.colDef.headerName === "PLYWOOD") && owner) {
+      setClickedCellData(event.data);
+      setIsModalOpen(true)
+    }
+    await getDetails();
+  }
+
   return {
     handleRowDragEnd,
-    handleCellValueChanged,
+    // handleCellValueChanged,
     onGridReady,
     defaultColDef,
+    onCellClicked
   }
 }
 

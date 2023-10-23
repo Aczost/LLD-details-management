@@ -48,13 +48,27 @@
 }
 
 /* Custom AgGrid container */
-.custom-ag-grid {
+/* .custom-ag-grid {
   height: 400px;
   width: 100%;
   margin-top: 20px;
   text-align: left;
-}
+} */
 
+/* .ag-theme-alpine .ag-header-cell {
+  font-family: cursive;
+  margin-right: 300px ;
+} */
+
+/* Increase the size of the cell's content (optional) */
+/* .ag-cell-value {
+  padding: 0 100px; 
+  margin-right: 200px;
+} */
+
+.ant-col .ant-form-item-label .css-dev-only-do-not-override-pr0fja {
+  margin-left: 4%;
+}
 
 @media (max-width: 576px) {
   .custom-ag-grid {

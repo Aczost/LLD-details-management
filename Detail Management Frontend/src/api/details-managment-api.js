@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_ROUTES} from '../utils/enums.js';
+import { API_ROUTES } from '../utils/enums.js';
 const handleCreateDetail = async (data) => {
   const response = await axios.post(`${API_ROUTES.POST_DETAILS}`, data);
   return response;
@@ -29,4 +29,10 @@ const handleTaskStatus = async (data, id) => {
   const response = await axios.put(`${API_ROUTES.UPDATE_TASK_STATUS}/${id}`, data);
   return response;
 }
-export {handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus}
+
+// to do change name 
+const handleStartEndAndDuration = async (data, id) => {
+  const response = await axios.put(`${API_ROUTES.UPDATE_START_END_DURATION}/${id}`, data);
+  return response
+}
+export { handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus, handleStartEndAndDuration }
