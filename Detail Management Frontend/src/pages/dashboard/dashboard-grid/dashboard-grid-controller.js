@@ -1,15 +1,16 @@
 import { useMemo } from "react";
 import { Button, message } from "antd";
-import { handleGetDetails, handleStartEndAndDuration } from "../../../api/details-managment-api";
+import { handleGetDetails, handleStartEndAndDuration as updateJobDetails, } from "../../../api/details-managment-api";
 import { useAppStore } from "../../../store/store";
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 import { CgSandClock } from 'react-icons/cg'
 import { LiaUserClockSolid } from 'react-icons/lia'
+
 import moment from "moment-timezone";
 
-const useDashboarsGridController = () => {
+const useDashboarsGridController = (form, prefix, moduleStartValue, setModuleStartValue) => {
 
-  const { setRowData, jobStatus, setIsModalOpen, columnHeaderName } = useAppStore();
+  const { setRowData, jobStatus, setIsModalOpen, clickedCellData } = useAppStore();
 
   const getDetails = async () => {
     try {
@@ -26,7 +27,7 @@ const useDashboarsGridController = () => {
           .format("dddd DD-MM-YYYY hh:mm:ss A"),
         inProcess: true,
       };
-      await handleStartEndAndDuration(data, val.data.id);
+      await updateJobDetails(data, val.data.id);
       await getDetails();
     }
     else if (val.data.inProcess && val.data.designEndedAt && val.data.laserEndedAt && val.data.benderEndedAt && val.data.fittingEndedAt && val.data.creasingEndedAt) {
@@ -47,7 +48,7 @@ const useDashboarsGridController = () => {
           .format("dddd DD-MM-YYYY hh:mm:ss A"),
         duration: `${days}D, ${hours}H, ${minutes}M, ${seconds}S`,
       };
-      await handleStartEndAndDuration(data, val.data.id);
+      await updateJobDetails(data, val.data.id);
       await getDetails();
 
     }
@@ -69,8 +70,9 @@ const useDashboarsGridController = () => {
       {
         headerName: "SERIAL NO",
         valueGetter: (params) => params.node.rowIndex + 1,
-        filter: false, // If you don't want to filter this column
+        filter: false, 
         editable: false,
+        pinned: 'left',
         width: "121px",
       },
       {
@@ -115,7 +117,6 @@ const useDashboarsGridController = () => {
                     backgroundColor: "#4CBB17",
                     color: "white",
                     border: "none",
-                    // marginTop: '-14px'
                   }}
                 >
                   Completed
@@ -126,7 +127,7 @@ const useDashboarsGridController = () => {
                     type="primary"
                     danger
                     onClick={() => handleStartEnd(val)}
-                   
+
                   >
                     End
                   </Button>
@@ -182,19 +183,12 @@ const useDashboarsGridController = () => {
 
       },
       {
-        // field: "pickedBy",
         field: "laserBy",
         headerName: "LASER BY",
         filter: "agTextColumnFilter",
         editable: true,
-        // cellEditor: "agSelectCellEditor",
-        // cellEditorParams: {
-        //   values: LASER,
-        // },
-        // onCellValueChanged: (event) => onChange(event),
         cellRenderer: (val) => {
           if (val.data.laserStartedAt && val.data.laserEndedAt) {
-            // return <><span style={{marginRight:"10px"}}>{val.data.designBy}</span> <abbr title="Completed"><RiCheckboxCircleLine size={19}/></abbr></> 
             return (
               <div style={{ display: 'flex', }}>
                 <div style={{ marginRight: "10px" }}>
@@ -233,14 +227,8 @@ const useDashboarsGridController = () => {
         headerName: "BENDER BY",
         filter: "agTextColumnFilter",
         editable: true,
-        // cellEditor: "agSelectCellEditor",
-        // cellEditorParams: {
-        //   values: BENDER,
-        // },
-        // onCellValueChanged: (event) => onChange(event),
         cellRenderer: (val) => {
           if (val.data.benderStartedAt && val.data.benderEndedAt) {
-            // return <><span style={{marginRight:"10px"}}>{val.data.designBy}</span> <abbr title="Completed"><RiCheckboxCircleLine size={19}/></abbr></> 
             return (
               <div style={{ display: 'flex', }}>
                 <div style={{ marginRight: "10px" }}>
@@ -279,14 +267,8 @@ const useDashboarsGridController = () => {
         headerName: "FITTING BY",
         filter: "agTextColumnFilter",
         editable: true,
-        // cellEditor: "agSelectCellEditor",
-        // cellEditorParams: {
-        //   values: FITTING,
-        // },
-        // onCellValueChanged: (event) => onChange(event),
         cellRenderer: (val) => {
           if (val.data.fittingStartedAt && val.data.fittingEndedAt) {
-            // return <><span style={{marginRight:"10px"}}>{val.data.designBy}</span> <abbr title="Completed"><RiCheckboxCircleLine size={19}/></abbr></> 
             return (
               <div style={{ display: 'flex', }}>
                 <div style={{ marginRight: "10px" }}>
@@ -325,14 +307,8 @@ const useDashboarsGridController = () => {
         headerName: "CREASING BY",
         filter: "agTextColumnFilter",
         editable: true,
-        // cellEditor: "agSelectCellEditor",
-        // cellEditorParams: {
-        //   values: CREASING,
-        // },
-        // onCellValueChanged: (event) => onChange(event),
         cellRenderer: (val) => {
           if (val.data.creasingStartedAt && val.data.creasingEndedAt) {
-            // return <><span style={{marginRight:"10px"}}>{val.data.designBy}</span> <abbr title="Completed"><RiCheckboxCircleLine size={19}/></abbr></> 
             return (
               <div style={{ display: 'flex', }}>
                 <div style={{ marginRight: "10px" }}>
@@ -429,14 +405,92 @@ const useDashboarsGridController = () => {
     [jobStatus]
   );
 
-  const onFinish = (value) => {
-  }
+  const modalDisplayFields = [
+    {
+      key: 1,
+      label: "Party",
+      children: clickedCellData.name,
+    },
+    {
+      key: 2,
+      label: "Plywood",
+      children: clickedCellData.plywood,
+    },
+    {
+      key: 3,
+      label: "Cutting",
+      children: clickedCellData.cutting,
+    },
+    {
+      key: 4,
+      label: "Creasing",
+      children: clickedCellData.creasing,
+    },
+    {
+      key: 5,
+      label: "Job",
+      children: clickedCellData.description,
+    },
+    {
+      key: 6,
+      label: `${prefix.charAt(0).toUpperCase() + prefix.slice(1).toLowerCase()
+        } By`,
+      children: clickedCellData[`${prefix.toLowerCase()}By`],
+    },
+    {
+      key: 7,
+      label: "Starte At",
+      children: clickedCellData[`${prefix.toLowerCase()}StartedAt`],
+    },
+    {
+      key: 8,
+      label: "Ended At",
+      children: clickedCellData[`${prefix.toLowerCase()}EndedAt`],
+    },
+  ];
+
+  const onFinish = async (value) => {
+    if (clickedCellData.startedAt) {
+      const data = {};
+      if (
+        !clickedCellData[`${prefix.toLowerCase()}StartedAt`] &&
+        moduleStartValue.length > 0
+      ) {
+        data[`${prefix.toLowerCase()}By`] = moduleStartValue;
+        data[`${prefix.toLowerCase()}StartedAt`] = moment
+          .tz("Asia/Calcutta")
+          .format("dddd DD-MM-YYYY hh:mm:ss A");
+        setIsModalOpen(false);
+        setModuleStartValue("");
+      } else if (
+        clickedCellData[`${prefix.toLowerCase()}StartedAt`] &&
+        moduleStartValue.length > 0
+      ) {
+        data[`${prefix.toLowerCase()}By`] = moduleStartValue;
+        data[`${prefix.toLowerCase()}EndedAt`] = moment
+          .tz("Asia/Calcutta")
+          .format("dddd DD-MM-YYYY hh:mm:ss A");
+        setIsModalOpen(false);
+        setModuleStartValue("");
+      } else {
+        message.error(`Please select ${prefix.toLowerCase()} by`);
+      }
+      await updateJobDetails(data, clickedCellData.id);
+      await getDetails();
+      form.resetFields();
+      setModuleStartValue("");
+    } else {
+      message.error("Please Start The Job.");
+    }
+  };
 
   return {
     handleCancel,
     handleOk,
     onFinish,
+    getDetails,
     gridColumnDefs,
+    modalDisplayFields
 
   }
 }
