@@ -1,19 +1,21 @@
 import useTableController from "./table-controller";
 
-import {AgGridReact} from "ag-grid-react";
-import {useAppStore} from "../../store/store";
+import { AgGridReact } from "ag-grid-react";
+import { useAppStore } from "../../store/store";
+// import { useEffect } from "react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "ag-grid-enterprise";
 
-const AgGridTable = ({columnDefs}) => {
+const AgGridTable = ({ columnDefs }) => {
 
-	const {handleRowDragEnd, onGridReady, onCellClicked, defaultColDef} = useTableController();
-	const {rowData} = useAppStore();
-	
+	const { handleRowDragEnd, onGridReady, onCellClicked, noRowOverLay, defaultColDef } = useTableController();
+	const { rowData } = useAppStore();
+
+
 	return (
-		<div className="ag-theme-alpine custom-ag-grid" style={{width:"100%", height:"700px"}}>
+		<div className="ag-theme-alpine custom-ag-grid" style={{ width: "100%", height: "700px" }}>
 			<AgGridReact
 				rowData={rowData}
 				columnDefs={columnDefs}
@@ -29,6 +31,7 @@ const AgGridTable = ({columnDefs}) => {
 				style={{ width: '100%', height: '100%' }}
 				singleClickEdit={true}
 				onCellClicked={onCellClicked}
+				overlayNoRowsTemplate={noRowOverLay()}
 			/>
 		</div>
 	);

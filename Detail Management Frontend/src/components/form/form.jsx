@@ -9,7 +9,7 @@ const {Option} = Select;
 
 const ContactForm = () => {
 
-  const {setRowData} = useAppStore();
+  const {setRowData, setShowRowData} = useAppStore();
   const [form] = Form.useForm();
   const [inputValue, setInputValue] = useState("");
   const [party, setParty] = useState(PARTY);
@@ -20,7 +20,11 @@ const ContactForm = () => {
   const getDetails = async () => {
     try {
       const {data} = await handleGetDetails();
-      setRowData(data.data);
+      if (data.data.length > 0) {
+        setRowData(data.data);
+      } else {
+        setShowRowData(true);
+      }
     } catch (err) {}
   };
 

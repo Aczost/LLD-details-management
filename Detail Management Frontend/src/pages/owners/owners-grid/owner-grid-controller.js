@@ -5,7 +5,7 @@ import { useMemo } from "react";
 
 const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
 
-  const { setRowData, setIsModalOpen, clickedCellData } = useAppStore();
+  const { setRowData, setIsModalOpen, clickedCellData, setShowRowData } = useAppStore();
 
   const modalDisplayFields = [
     {
@@ -34,6 +34,17 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
       children: clickedCellData.creasing,
     },
   ];
+
+  const getDetails = async () => {
+    try {
+      const { data } = await handleGetDetails();
+      if (data.data.length > 0) {
+        setRowData(data.data);
+      } else {
+        setShowRowData(true);
+      }
+    } catch (err) { }
+  };
 
   const handleDeleteRow = async (val) => {
     try {
@@ -161,12 +172,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     }
   };
 
-  const getDetails = async () => {
-    try {
-      const { data } = await handleGetDetails();
-      setRowData(data.data);
-    } catch (err) { }
-  };
+  
 
   const handleInputChange = async (val) => {
     const id = val.data.id;

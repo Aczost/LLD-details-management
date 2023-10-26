@@ -42,8 +42,12 @@ const createDashboardSlice = (set, get) => ({
   defaultValue: '',
   setDefaultValue: (data) =>{
     set({defaultValue: data})
-  }
+  },
 
+  isStartEndModal: false,
+  setIsStartEndModal: (data) => {
+    set({isStartEndModal: data})
+  }
   
 });
 
