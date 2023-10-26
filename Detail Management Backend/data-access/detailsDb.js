@@ -84,9 +84,21 @@ module.exports = function userdata({ mysql, pool }) {
         return result
     }
 
-    async function updateJobDetails({designBy, designStartedAt, designEndedAt, laserBy, laserStartedAt, laserEndedAt, benderBy, benderStartedAt, benderEndedAt, fittingBy, fittingStartedAt, fittingEndedAt, creasingBy, creasingStartedAt, creasingEndedAt, pickedBy ,startedAt, endedAt, duration, id, inProcess }) {
+    async function updateJobDetails({designBy, designStartedAt, designEndedAt, laserBy, laserStartedAt, laserEndedAt, benderBy, benderStartedAt, benderEndedAt, fittingBy, fittingStartedAt, fittingEndedAt, creasingBy, creasingStartedAt, creasingEndedAt, deliveryBy, deliveryStartedAt, deliveryEndedAt ,pickedBy ,startedAt, endedAt, duration, id, inProcess }) {
         let queryString = `UPDATE detailsManagement SET `
         let valuesArray = [];
+        if(deliveryBy) {
+            queryString += 'deliveryBy=?,',
+            valuesArray.push(deliveryBy);
+        }
+        if(deliveryStartedAt) {
+            queryString += 'deliveryStartedAt=?,',
+            valuesArray.push(deliveryStartedAt);
+        }
+        if(deliveryEndedAt) {
+            queryString += 'deliveryEndedAt=?,',
+            valuesArray.push(deliveryEndedAt);
+        }
         if(creasingBy) {
             queryString += 'creasingBy=?,',
             valuesArray.push(creasingBy);
