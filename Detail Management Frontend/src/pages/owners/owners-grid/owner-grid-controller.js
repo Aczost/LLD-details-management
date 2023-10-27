@@ -37,6 +37,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
 
   const getDetails = async () => {
     try {
+      setRowData([])
       const { data } = await handleGetDetails();
       if (data.data.length > 0) {
         setRowData(data.data);
@@ -50,8 +51,8 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     try {
       await handleDeleteDetail(val.id);
       await getDetails();
-      message.success("Deleted Successfully!");
     } catch (error) {}
+    message.success("Deleted Successfully!");
   };
 
   const columnDefs = useMemo(
