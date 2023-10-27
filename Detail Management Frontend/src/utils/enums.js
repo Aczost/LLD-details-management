@@ -16,7 +16,7 @@ export const DYNAMICOPTIONS = {
   DESIGN: ["Praful", "Dhruvanshu"],
   LASER: ['Vicky', 'Mahindra', 'Dhruvanshu'],
   BENDER: ['Mahindra', 'Manoj', 'Vicky', 'Dhruvanshu',],
-  DELIVER: ['Vinod', 'Bhola Kaka', 'Vivek', 'Dhruvanshu'],
+  DELIVERY: ['Vinod', 'Bhola Kaka', 'Vivek', 'Dhruvanshu'],
   FITTING: ['Raju', 'Shatru', 'Nikul', 'Vicky', 'Dhruvanshu'],
   CREASING: ['Vivek', 'Parag', 'Manoj', 'Vicky', 'Mahindra', 'Raju', 'Shatru', 'Nikul', 'Dhruvanshu']
 }
