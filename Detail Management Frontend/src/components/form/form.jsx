@@ -101,6 +101,13 @@ const ContactForm = () => {
         </Select>
       </Form.Item>
       <Form.Item
+        name="job"
+        label="Job No."
+        rules={[{required: true, message: "Please enter a job number"}]}
+      >
+        <Input style={{width:"150px"}} placeholder="Enter a job number  " />
+      </Form.Item>
+      <Form.Item
         name="plywood"
         label="Plywood"
         rules={ [{required: true, message: "Please select or add a plywood"}]}
@@ -178,13 +185,7 @@ const ContactForm = () => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item
-        name="job"
-        label="Job No."
-        rules={[{required: true, message: "Please enter a job number"}]}
-      >
-        <Input style={{width:"150px"}} placeholder="Enter a job number  " />
-      </Form.Item>
+      
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
