@@ -74,17 +74,6 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         width: "121px",
       },
       {
-        field: "isCompleted",
-        headerName: "COMPLETED",
-        cellRenderer: (val) => (
-          <input
-            type="checkbox"
-            checked={val.data.isCompleted}
-            onClick={() => handleInputChange(val)}
-          />
-        ),
-      },
-      {
         field: "name",
         filter: "agTextColumnFilter",
         headerName: "PARTY",
@@ -114,8 +103,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         filter: "agTextColumnFilter",
         editable: true,
         resizable: true,
-        width: "700px",
-      },
+        },
       {
         field: "createdBy",
         headerName: "CREATED BY",
@@ -126,7 +114,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         field: "createdAt",
         headerName: "CREATED ON",
         filter: "agTextColumnFilter",
-        width: "300px",
+        width: "290px",
       },
       {
         field: "",
@@ -175,14 +163,14 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
 
   
 
-  const handleInputChange = async (val) => {
-    const id = val.data.id;
-    const data = {
-      status: !val.data.isCompleted,
-    };
-    await handleTaskStatus(data, id);
-    await getDetails();
-  };
+  // const handleInputChange = async (val) => {
+  //   const id = val.data.id;
+  //   const data = {
+  //     status: !val.data.isCompleted,
+  //   };
+  //   await handleTaskStatus(data, id);
+  //   await getDetails();
+  // };
 
   const handleOk = (value) => {
     setIsModalOpen(false);
@@ -209,7 +197,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     handleSelect,
     onFinish,
     getDetails,
-    handleInputChange,
+    // handleInputChange,
     handleDeleteRow,
     modalDisplayFields,
     columnDefs

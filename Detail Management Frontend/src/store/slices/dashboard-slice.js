@@ -19,11 +19,6 @@ const createDashboardSlice = (set, get) => ({
     set({pickedBy: data})
   },
 
-  currentRow : {},
-  setCurrentRow: (data) => {
-    set({currentRow: data});
-  },
-
   isModalOpen: false,
   setIsModalOpen: (data) => {
     set({isModalOpen: data})
@@ -39,15 +34,20 @@ const createDashboardSlice = (set, get) => ({
     set({columnHeaderName: data})
   },
 
-  defaultValue: '',
-  setDefaultValue: (data) =>{
-    set({defaultValue: data})
-  },
-
   isStartEndModal: false,
   setIsStartEndModal: (data) => {
     set({isStartEndModal: data})
-  }
+  },
+
+  sectionValue: "",
+  setSectionValue: (data) => {
+    set({sectionValue: data})
+  },
+
+  sectionForm: {},
+  setSectionForm: (data) => {
+    set({sectionForm: data})
+  },
   
 });
 

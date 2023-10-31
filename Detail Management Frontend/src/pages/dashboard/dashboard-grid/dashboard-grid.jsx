@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, Modal, Select, Descriptions, message, Button } from "antd";
+import { Form, Modal, Descriptions, Button } from "antd";
 import { useAppStore } from "../../../store/store";
-import { DYNAMICOPTIONS } from "../../../utils/enums";
 
 import AgGridTable from "../../../components/table/table";
 import useDashboarsGridController from "./dashboard-grid-controller";
-const { Option } = Select;
+import Section from "../../../components/list/list";
 
 const DashboardGrid = () => {
-  const { isModalOpen, clickedCellData, columnHeaderName, setOwner, isStartEndModal } = useAppStore();
+  const { clickedCellData, columnHeaderName, setOwner, isStartEndModal } = useAppStore();
   const [prefix, setPrifix] = useState(columnHeaderName.split(" ")[0]);
   const [moduleStartValue, setModuleStartValue] = useState("");
   const [form] = Form.useForm();
-  const { gridColumnDefs, handleCancel, modalDisplayFields, onFinish, handleStartEndModalBtn, startAndEndModalDisplayField, jobWorkerDetails } = useDashboarsGridController(form, prefix, moduleStartValue, setModuleStartValue);
-  const options = DYNAMICOPTIONS[prefix] || [];
+  const { gridColumnDefs, handleCancel, handleStartEndModalBtn, startAndEndModalDisplayField, jobWorkerDetails } = useDashboarsGridController(prefix, moduleStartValue, setModuleStartValue);
 
   useEffect(() => {
     setOwner(false);
@@ -28,20 +26,14 @@ const DashboardGrid = () => {
     <>
       <AgGridTable columnDefs={gridColumnDefs} />
       <Modal
+        width={'90%'}
+        style={{top:"5px"}}
         title={columnHeaderName}
-        open={isModalOpen}
+        open={isStartEndModal}
         onCancel={handleCancel}
         footer={(_, { CancelBtn }) => (
           <>
-            {!clickedCellData[`${prefix.toLowerCase()}StartedAt`] ? (
-              <Button type="primary" onClick={onFinish}>
-                Start
-              </Button>
-            ) : !clickedCellData[`${prefix.toLowerCase()}EndedAt`] ? (
-              <Button type="primary" danger onClick={onFinish}>
-                End
-              </Button>
-            ) : (
+            {clickedCellData.endedAt ? (
               <Button
                 type="primary"
                 disabled
@@ -53,78 +45,25 @@ const DashboardGrid = () => {
               >
                 Completed
               </Button>
-            )}
-            <CancelBtn />
-          </>
-        )}
-      >
-        <hr style={{ marginBottom: "20px" }} />
-        <Form form={form} name="myForm" onFinish={onFinish}>
-          <Form.Item
-            name="columnHeaderName"
-            label={`${columnHeaderName}: `}
-            rules={[{ required: true }]}
-          >
-            <Select
-              placeholder={`SELECT ${prefix} BY`}
-              onSelect={(val) => {
-                setModuleStartValue(val);
-              }}
-            >
-              {options
-                ? options.map((option, index) => (
-                  <Option key={index} value={option}>
-                    {option}
-                  </Option>
-                ))
-                : null}
-            </Select>
-          </Form.Item>
-        </Form>
-        <Descriptions
-          title={`Job Info Related to ${prefix.charAt(0).toUpperCase() + prefix.slice(1).toLowerCase()
-            }.`}
-          items={modalDisplayFields}
-        />
-      </Modal>
-      <Modal
-        width={'90%'}
-        title={columnHeaderName}
-        open={isStartEndModal}
-        onCancel={handleCancel}
-        footer={(_, { CancelBtn }) => (
-          <>
-            {clickedCellData.endedAt ? (
+            ) : clickedCellData.inProcess ? (
+              <>
                 <Button
                   type="primary"
-                  disabled
-                  style={{
-                    backgroundColor: "#4CBB17",
-                    color: "white",
-                    border: "none",
-                  }}
+                  danger
+                  onClick={() => handleStartEndModalBtn(clickedCellData)}
+
                 >
-                  Completed
+                  End
                 </Button>
-              ) : clickedCellData.inProcess ? (
-                <>
-                  <Button
-                    type="primary"
-                    danger
-                    onClick={() => handleStartEndModalBtn(clickedCellData)}
+              </>
 
-                  >
-                    End
-                  </Button>
-                </>
-
-              ) : (
-                <Button type="primary"
-                 onClick={() => handleStartEndModalBtn(clickedCellData)}
-                  >
-                  Start
-                </Button>
-              )}
+            ) : (
+              <Button type="primary"
+                onClick={() => handleStartEndModalBtn(clickedCellData)}
+              >
+                Start
+              </Button>
+            )}
             <CancelBtn />
           </>
         )}
@@ -139,6 +78,7 @@ const DashboardGrid = () => {
         <Descriptions
           items={jobWorkerDetails}
         />
+        <Section />
       </Modal>
     </>
   );

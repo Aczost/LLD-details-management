@@ -1,5 +1,4 @@
 import { useRef, useEffect, useMemo } from "react";
-import { message } from "antd";
 
 import {
   handleDragDrop,
@@ -9,7 +8,7 @@ import {
 import { useAppStore } from "../../store/store";
 
 const useTableController = () => {
-  const { setRowData, owner, setIsModalOpen, setClickedCellData, setColumnHeaderName, setDefaultValue, showRowData, setShowRowData } = useAppStore()
+  const { setRowData, owner, setIsModalOpen, setClickedCellData, setColumnHeaderName , setShowRowData } = useAppStore()
   const gridApiRef = useRef(null);
   useEffect(() => {
     getDetails(); // Fetch data initially
@@ -49,19 +48,6 @@ const useTableController = () => {
     gridApiRef.current = params.api;
   };
 
-  // const handleCellValueChanged = async (event) => {
-  //   const data = {
-  //     name: event.data.name,
-  //     description: event.data.description,
-  //   };
-  //   try {
-  //     await handleEditDetail(data, event.data.id);
-  //     await getDetails();
-  //     message.success("Edited Successfully.");
-  //   } catch (error) {
-  //   }
-  // };
-
   const handleRowDragEnd = async (event) => {
     const updatedData = event.api.getModel().rowsToDisplay.map((row) => row.data);
     try {
@@ -72,7 +58,6 @@ const useTableController = () => {
   };
 
   const onCellClicked = async (event) => {
-    setDefaultValue("")
     setIsModalOpen(false);
     if(event.colDef.headerName==="START-END" ) {
       setColumnHeaderName(event.colDef.headerName)
