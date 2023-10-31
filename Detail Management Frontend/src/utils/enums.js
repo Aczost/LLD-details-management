@@ -23,7 +23,7 @@ export const DYNAMICOPTIONS = {
 export const PARTY = ['LPP'];
 export const CREATEDBY = ['Dhruvanshu', "Praful"]
 export const PLYWOOD = ['18mm', '18mm  Birch', '15mm']
-export const CUTTING = ['Black Cat (23.80mm) CB', 'Black Cat (23.80mm) LCB', 'Juho (23.80mm) CB', 'Juho (23.80mm) LCB', 'Bohmer (23.80mm) CB', 'Bohmer (23.80mm) LCB', 'Aitches (23.80mm) CB']
+export const CUTTING = ['Black Cat (23.80mm) CB', 'Black Cat (23.80mm) LCB', 'Juho (23.80mm) CB', 'Juho (23.80mm) LCB', 'Bohmer (23.80mm) CB', 'Bohmer (23.80mm) LCB', 'Aitches (23.80mm) CB', 'Proflex (23.80mm) CB']
 export const CREASING = ['Sigma (23.25mm)', 'Bohmer (23.25mm)', 'Juho (23.25mm)', 'Juho (23.30mm)', 'DTL (23.25mm)' ]
 export const ALLJOBSECTION = [
   {

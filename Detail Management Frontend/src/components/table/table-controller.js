@@ -39,6 +39,7 @@ const useTableController = () => {
       cellStyle: { textAlign: "left" },
       resizable: true,
       // flex: 1,
+      suppressMovable: true
 
     }),
     []
