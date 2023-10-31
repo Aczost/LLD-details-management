@@ -31,7 +31,7 @@ const OwnersGrid = () => {
 
   return (
     <>
-      <AgGridTable columnDefs={columnDefs} />;
+      <AgGridTable columnDefs={columnDefs} />
       <Modal
         title="Update Job Details"
         open={isModalOpen}
