@@ -4,16 +4,18 @@ import { handleGetDetails, handleStartEndAndDuration as updateJobDetails, handle
 import { useAppStore } from "../../../store/store";
 
 import moment from "moment-timezone";
+import handleCookies from "../../../api/authentication/login";
 
 const useDashboarsGridController = (prefix,setFetch) => {
-  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, sectionForm, isOtpValid, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi } = useAppStore();
-  // console.info("otpvaluefrom api", otpValueFromApi)
+  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi, setOwner, owner} = useAppStore();
+  // console.log('otp from api', otpValueFromApi);
   const getDetails = async () => {
     try {
       setRowData([])
       const { data } = await handleGetDetails();
       if (data.data.length > 0) {
         setRowData(data.data);
+        setOwner(false)
       } else {
         setShowRowData(true);
       }
@@ -76,7 +78,6 @@ const useDashboarsGridController = (prefix,setFetch) => {
     setIsModalOpen(false);
     setIsStartEndModal(false);
     setSectionValue("")
-    sectionForm.resetFields();
   };
 
   const gridColumnDefs = useMemo(
@@ -143,7 +144,6 @@ const useDashboarsGridController = (prefix,setFetch) => {
                     type="primary"
                     danger
                     onClick={() => handleStartEnd(val)}
-
                   >
                     End
                   </Button>
@@ -206,6 +206,7 @@ const useDashboarsGridController = (prefix,setFetch) => {
   const handleGetOtp = async () => {
     setFetch(true)
     const response = await handleGetOtpCall();
+    handleCookies();
     setOtpValueFromApi(response.data.data);
     setFetch(false)
     message.info('OTP sent to your email.')
@@ -222,6 +223,41 @@ const useDashboarsGridController = (prefix,setFetch) => {
     }
   };
 
+  const handleJobSection = async (sectionName, sectionValue, sectionPerformBy) => {
+    if (clickedCellData.startedAt) {
+      const data = {};
+      if (
+        !clickedCellData[`${sectionName}StartedAt`] &&
+        sectionValue.length > 0
+      ) {
+        data[`${sectionName}By`] = sectionValue;
+        data[`${sectionName}StartedAt`] = moment
+          .tz("Asia/Calcutta")
+          .format("dddd DD-MM-YYYY hh:mm:ss A");
+        setIsStartEndModal(false);
+        setSectionValue("");
+      } else if (
+        clickedCellData[`${sectionName}StartedAt`] &&
+        (sectionValue.length > 0 || sectionPerformBy)
+      ) {
+        data[`${sectionName}By`] = sectionValue;
+        data[`${sectionName}EndedAt`] = moment
+          .tz("Asia/Calcutta")
+          .format("dddd DD-MM-YYYY hh:mm:ss A");
+        setIsStartEndModal(false);
+        setSectionValue("");
+      } else {
+        message.error(`Please select ${sectionName} by`);
+      }
+      await updateJobDetails(data, clickedCellData.id);
+      await getDetails();
+      setSectionValue("");
+    } else {
+      message.error("Please Start The Job.");
+      setSectionValue("");
+    }
+  }
+
   return {
     handleCancel,
     handleOk,
@@ -229,6 +265,7 @@ const useDashboarsGridController = (prefix,setFetch) => {
     handleStartEndModalBtn,
     handleOtpChange,
     handleGetOtp,
+    handleJobSection,
     gridColumnDefs,
     modalDisplayFields,
     startAndEndModalDisplayField,

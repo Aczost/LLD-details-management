@@ -1,8 +1,10 @@
 import React from "react";
 import Toggle from "../toggle/toggle";
 import image from "../../assets/LINK_LASER_DIE-removebg-preview.png";
+import { useAppStore } from "../../store/store";
 
 const Navbar = () => {
+	const {owner} = useAppStore()
 	return (
 		<div
 			style={{
@@ -15,6 +17,9 @@ const Navbar = () => {
 			<div style={{width: "150px"}}>
 				<img src={image} alt="#Logo" style={{width: "100%", height: "auto"}} />
 			</div>
+			{
+				owner &&  owner? <h1>JOB CREATION</h1>:<h1>WORKSHOP</h1>
+			}
 			<div>
 				<Toggle />
 			</div>

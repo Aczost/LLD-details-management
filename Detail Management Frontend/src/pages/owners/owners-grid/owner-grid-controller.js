@@ -5,8 +5,7 @@ import { useMemo } from "react";
 
 const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
 
-  const { setRowData, setIsModalOpen, clickedCellData, setShowRowData } = useAppStore();
-
+  const { setRowData, setIsModalOpen, clickedCellData, setShowRowData, setOwner, owner } = useAppStore();
   const modalDisplayFields = [
     {
       key: 1,
@@ -41,6 +40,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
       const { data } = await handleGetDetails();
       if (data.data.length > 0) {
         setRowData(data.data);
+        setOwner(true)
       } else {
         setShowRowData(true);
       }

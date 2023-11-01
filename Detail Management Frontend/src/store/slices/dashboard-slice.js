@@ -44,11 +44,6 @@ const createDashboardSlice = (set, get) => ({
     set({sectionValue: data})
   },
 
-  sectionForm: {},
-  setSectionForm: (data) => {
-    set({sectionForm: data})
-  },
-
   isOtpValid: false,
   setIsOtpValid: (data) => {
     set({isOtpValid: data})
