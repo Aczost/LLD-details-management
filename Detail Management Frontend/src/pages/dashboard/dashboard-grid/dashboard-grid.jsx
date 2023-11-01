@@ -27,8 +27,8 @@ const DashboardGrid = () => {
     const userInfo = Cookies.get('userInfo');
     const expirationTime = Cookies.get("expirationTime");
     if (userInfo && expirationTime && atob(userInfo) === 'Link Leaser Die User' && Number(expirationTime) >= Date.now()) {
-      setIsOtpValid(!isOtpValid);
-    }
+      setIsOtpValid(true);
+    } 
   }, []);
 
   
