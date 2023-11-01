@@ -5,9 +5,10 @@ const {
     deleteDetailsAction,
     addDetailsInBulkAction,
     updateIfTaskCompletedAction,
-    updateIfJobStartOrEndAction
-    
+    updateIfJobStartOrEndAction,
+    sendOtpMailAction,
 } = require('./controller')
+
 const express = require('express');
 const router = express.Router();
 
@@ -38,6 +39,10 @@ router.put('/task-status/:id', (req, res)=>{
 
 router.put('/task-picked-status/:id', (req, res)=>{
     updateIfJobStartOrEndAction({req, res});
+})
+
+router.get('/send-otp-mail', (req, res)=>{
+    sendOtpMailAction({req, res});
 })
 
 module.exports = {router}

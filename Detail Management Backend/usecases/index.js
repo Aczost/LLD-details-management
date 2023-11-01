@@ -1,5 +1,8 @@
 global.logger = console.log;
 const moment = require('moment-timezone');
+const random = require('random-string-alphanumeric-generator');
+const nodemailer = require("nodemailer");
+
 const { detailsDb } = require('../data-access')
 
 const makeGetDetails = require('./get-details.js')
@@ -23,6 +26,9 @@ const updateIfTaskCompleted = makeUpdateIfTaskCompleted({ detailsDb });
 const makeUpdateJobDetails = require('./update-if-job-start-or-end');
 const updateJobDetails = makeUpdateJobDetails({ detailsDb });
 
+const makeSendOtpMail = require('./send-otp-mail');
+const sendOtpMail = makeSendOtpMail({random, nodemailer});
+
 module.exports = Object.freeze({
     getDetails,
     addDetails,
@@ -30,5 +36,6 @@ module.exports = Object.freeze({
     deleteDetails,
     addDetailsInBulk,
     updateIfTaskCompleted,
-    updateJobDetails
+    updateJobDetails,
+    sendOtpMail
 })

@@ -22,6 +22,9 @@ const updateIfTaskCompletedAction = makeUpdateIfTaskCompletedAction({updateIfTas
 const makeUpdateIfJobStartOrEndAction = require('./update-if-job-start-or-end');
 const updateIfJobStartOrEndAction = makeUpdateIfJobStartOrEndAction({updateJobDetails: useCases.updateJobDetails})
 
+const makeSendOtpMailAction= require('./send-otp-mail-action');
+const sendOtpMailAction = makeSendOtpMailAction({sendOtpMail: useCases.sendOtpMail});
+
 module.exports = Object.freeze({
     getDetailsAction,
     addDetailsAction,
@@ -29,5 +32,6 @@ module.exports = Object.freeze({
     deleteDetailsAction,
     addDetailsInBulkAction,
     updateIfTaskCompletedAction,
-    updateIfJobStartOrEndAction
+    updateIfJobStartOrEndAction,
+    sendOtpMailAction,
 })
