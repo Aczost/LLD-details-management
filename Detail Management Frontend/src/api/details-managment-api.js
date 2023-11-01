@@ -35,4 +35,9 @@ const handleStartEndAndDuration = async (data, id) => {
   const response = await axios.put(`${API_ROUTES.UPDATE_START_END_DURATION}/${id}`, data);
   return response
 }
-export { handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus, handleStartEndAndDuration }
+
+const handleGetOtpCall = async () => {
+  return await axios.get(`${API_ROUTES.GET_OTP}`);
+
+}
+export { handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus, handleStartEndAndDuration, handleGetOtpCall }

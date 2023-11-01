@@ -14,7 +14,6 @@ const { Option } = Select;
 const Section = () => {
   const [form] = Form.useForm();
   const { clickedCellData, sectionValue, setSectionValue, setSectionForm } = useAppStore()
-  console.log("🚀 ~ file: list.jsx:13 ~ Section ~ clickedCellData:", clickedCellData.designStartedAt)
   const { handleJobSection } = useListController(form);
   useEffect(() => {
     setSectionForm(form)

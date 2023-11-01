@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { Button, message } from "antd";
-import { handleGetDetails, handleStartEndAndDuration as updateJobDetails, } from "../../../api/details-managment-api";
+import { handleGetDetails, handleStartEndAndDuration as updateJobDetails, handleGetOtpCall } from "../../../api/details-managment-api";
 import { useAppStore } from "../../../store/store";
 
 import moment from "moment-timezone";
 
-const useDashboarsGridController = ( prefix) => {
-
-  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, sectionForm } = useAppStore();
+const useDashboarsGridController = (prefix,setFetch) => {
+  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, sectionForm, isOtpValid, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi } = useAppStore();
+  // console.info("otpvaluefrom api", otpValueFromApi)
   const getDetails = async () => {
     try {
       setRowData([])
@@ -203,11 +203,32 @@ const useDashboarsGridController = ( prefix) => {
 
   ];
 
+  const handleGetOtp = async () => {
+    setFetch(true)
+    const response = await handleGetOtpCall();
+    setOtpValueFromApi(response.data.data);
+    setFetch(false)
+    message.info('OTP sent to your email.')
+  }
+
+  const handleOtpChange = (e) => {
+    const userEnteredOtp = e.target.value;
+    setOtpValue(userEnteredOtp);
+    if (otpValueFromApi === userEnteredOtp) {
+      setIsOtpValid(true);
+    } 
+    if(userEnteredOtp.length===4 && (otpValueFromApi !== userEnteredOtp)) {
+      message.error('Invalid OTP please try again.')
+    }
+  };
+
   return {
     handleCancel,
     handleOk,
     getDetails,
     handleStartEndModalBtn,
+    handleOtpChange,
+    handleGetOtp,
     gridColumnDefs,
     modalDisplayFields,
     startAndEndModalDisplayField,

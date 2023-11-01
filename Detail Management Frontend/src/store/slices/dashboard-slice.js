@@ -48,7 +48,22 @@ const createDashboardSlice = (set, get) => ({
   setSectionForm: (data) => {
     set({sectionForm: data})
   },
-  
+
+  isOtpValid: false,
+  setIsOtpValid: (data) => {
+    set({isOtpValid: data})
+  },
+
+  otpValue: null,
+  setOtpValue: (data) =>{
+    set({otpValue: data})
+  },
+
+  otpValueFromApi: null,
+  setOtpValueFromApi: (data) =>{
+    set({otpValueFromApi: data})
+  },
+
 });
 
 export default createDashboardSlice
