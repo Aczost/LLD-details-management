@@ -87,7 +87,6 @@ const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVa
         valueGetter: (params) => params.node.rowIndex + 1,
         filter: false,
         editable: false,
-        pinned: 'left',
         width: "121px",
       },
       {
@@ -97,6 +96,12 @@ const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVa
         editable: false,
         width: "178px",
 
+      },
+      {
+        field: "description",
+        headerName: "JOB",
+        filter: "agTextColumnFilter",
+        editable: false,
       },
       {
         field: "plywood",
@@ -113,12 +118,7 @@ const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVa
         filter: "agTextColumnFilter",
         headerName: "CREASING",
       },
-      {
-        field: "description",
-        headerName: "JOB",
-        filter: "agTextColumnFilter",
-        editable: false,
-      },
+      
       {
         field: "start",
         headerName: "START-END",

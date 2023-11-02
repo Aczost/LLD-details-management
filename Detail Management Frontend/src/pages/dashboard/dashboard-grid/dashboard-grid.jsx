@@ -42,7 +42,7 @@ const DashboardGrid = () => {
     <>
       <AgGridTable columnDefs={gridColumnDefs} />
 
-      {/* <div className={`${!isOtpValid ? "blured-bck" : null}`}>
+      <div className={`${!isOtpValid ? "blured-bck" : null}`}>
         <Modal
           closable={false}
           open={!isOtpValid}
@@ -71,7 +71,7 @@ const DashboardGrid = () => {
             <Input type="text" placeholder="Enter OTP" maxLength={4} onKeyUp={handleOtpChange} />
           </Form.Item>
         </Modal>
-      </div> */}
+      </div>
 
       <Modal
         width={'90%'}

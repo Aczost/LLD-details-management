@@ -50,13 +50,13 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
   const handleDeleteRow = async (val) => {
     try {
       let jobDelete = window.confirm("Are you sure you want to delete this job?");
-      if(jobDelete) {
+      if (jobDelete) {
         await handleDeleteDetail(val.id);
-      await getDetails();
+        await getDetails();
       } else {
 
       }
-    } catch (error) {}
+    } catch (error) { }
     message.success("Deleted Successfully!");
   };
 
@@ -67,15 +67,12 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         headerName: "",
         rowDrag: true,
         width: "20px",
-        pinned: 'left',
-
       },
       {
         headerName: "SERIAL NO",
         valueGetter: (params) => params.node.rowIndex + 1,
-        filter: false, 
+        filter: false,
         editable: false,
-        pinned: 'left',
         width: "121px",
       },
       {
@@ -83,6 +80,13 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         filter: "agTextColumnFilter",
         headerName: "PARTY",
         editable: true,
+      },
+      {
+        field: "description",
+        headerName: "JOB",
+        filter: "agTextColumnFilter",
+        editable: true,
+        resizable: true,
       },
       {
         field: "plywood",
@@ -102,13 +106,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
         headerName: "CREASING",
         editable: true,
       },
-      {
-        field: "description",
-        headerName: "JOB",
-        filter: "agTextColumnFilter",
-        editable: true,
-        resizable: true,
-        },
+
       {
         field: "createdBy",
         headerName: "CREATED BY",
@@ -166,7 +164,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     }
   };
 
-  
+
 
   // const handleInputChange = async (val) => {
   //   const id = val.data.id;
