@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Space direction="vertical" style={{width: '100%'}} size={[0, 48]}>
         <Layout>
-          {/* <Navbar /> */}
+          <Navbar />
           <Divider style={{marginTop: '0px'}}/>
           <Routes>
             <Route path='/' element={<Dashboard />} />
