@@ -49,8 +49,13 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
 
   const handleDeleteRow = async (val) => {
     try {
-      await handleDeleteDetail(val.id);
+      let jobDelete = window.confirm("Are you sure you want to delete this job?");
+      if(jobDelete) {
+        await handleDeleteDetail(val.id);
       await getDetails();
+      } else {
+
+      }
     } catch (error) {}
     message.success("Deleted Successfully!");
   };
