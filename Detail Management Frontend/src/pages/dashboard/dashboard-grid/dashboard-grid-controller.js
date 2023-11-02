@@ -6,8 +6,8 @@ import { useAppStore } from "../../../store/store";
 import moment from "moment-timezone";
 import handleCookies from "../../../api/authentication/login";
 
-const useDashboarsGridController = (prefix,setFetch) => {
-  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi, setOwner, owner} = useAppStore();
+const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVal) => {
+  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi, setOwner, owner } = useAppStore();
   // console.log('otp from api', otpValueFromApi);
   const getDetails = async () => {
     try {
@@ -217,45 +217,49 @@ const useDashboarsGridController = (prefix,setFetch) => {
     setOtpValue(userEnteredOtp);
     if (otpValueFromApi === userEnteredOtp) {
       setIsOtpValid(true);
-    } 
-    if(userEnteredOtp.length===4 && (otpValueFromApi !== userEnteredOtp)) {
+    }
+    if (userEnteredOtp.length === 4 && (otpValueFromApi !== userEnteredOtp)) {
       message.error('Invalid OTP please try again.')
     }
   };
 
-  const handleJobSection = async (sectionName, sectionValue, sectionPerformBy) => {
-    if (clickedCellData.startedAt) {
-      const data = {};
-      if (
-        !clickedCellData[`${sectionName}StartedAt`] &&
-        sectionValue.length > 0
-      ) {
-        data[`${sectionName}By`] = sectionValue;
-        data[`${sectionName}StartedAt`] = moment
-          .tz("Asia/Calcutta")
-          .format("dddd DD-MM-YYYY hh:mm:ss A");
-        setIsStartEndModal(false);
-        setSectionValue("");
-      } else if (
-        clickedCellData[`${sectionName}StartedAt`] &&
-        (sectionValue.length > 0 || sectionPerformBy)
-      ) {
-        data[`${sectionName}By`] = sectionValue;
-        data[`${sectionName}EndedAt`] = moment
-          .tz("Asia/Calcutta")
-          .format("dddd DD-MM-YYYY hh:mm:ss A");
-        setIsStartEndModal(false);
+  const handleJobSection = async (sectionName, sectionValue, sectionPerformBy,) => {
+    if ((clickedCellData[`${sectionName}StartedAt`] || (checkSection.sectionButtonName.toLowerCase() === sectionName || !sectionValue)) ) {
+      if (clickedCellData.startedAt) {
+        const data = {};
+        const currentTime = moment.tz("Asia/Calcutta");
+
+        if (
+          (!clickedCellData[`${sectionName}StartedAt`] && sectionValue.length > 0) ||
+          (clickedCellData[`${sectionName}StartedAt`] && (sectionValue.length > 0 || sectionPerformBy))
+        ) {
+          data[`${sectionName}By`] = Object.keys(value).includes(sectionName)? value[sectionName] : clickedCellData[`${sectionName}By`];
+
+          if (!clickedCellData[`${sectionName}StartedAt`]) {
+            data[`${sectionName}StartedAt`] = currentTime.format("dddd DD-MM-YYYY hh:mm:ss A");
+          } else {
+            data[`${sectionName}EndedAt`] = currentTime.format("dddd DD-MM-YYYY hh:mm:ss A");
+          }
+          setIsStartEndModal(false);
+          setSectionValue("");
+        } else {
+          message.error(`Please select ${sectionName} by`);
+        }
+
+        await updateJobDetails(data, clickedCellData.id);
+        await getDetails();
         setSectionValue("");
       } else {
-        message.error(`Please select ${sectionName} by`);
+        message.error("Please Start The Job.");
+        setSectionValue("");
       }
-      await updateJobDetails(data, clickedCellData.id);
-      await getDetails();
-      setSectionValue("");
-    } else {
-      message.error("Please Start The Job.");
-      setSectionValue("");
     }
+    else {
+      // setVal({});
+      message.error(`${checkSection.sectionButtonName.toUpperCase()} department employees cannot work in ${sectionName.toUpperCase()} department.`);
+      setIsStartEndModal(false);
+    }
+
   }
 
   return {

@@ -29,21 +29,27 @@ export const CREASING = ['Sigma (23.25mm)', 'Bohmer (23.25mm)', 'Juho (23.25mm)'
 export const ALLJOBSECTION = [
   {
     title: "Design",
+    button: "Design",
   },
   {
     title: "Laser",
+    button: "Laser"
   },
   {
     title: "Bender",
+    button: "Bender"
   },
   {
     title: "Fitting",
+    button: "Fitting",
   },
   {
     title: "Creasing",
+    button: "Creasing",
   },
   {
     title: "Delivery",
+    button: "Delivery",
   },
 ];
 

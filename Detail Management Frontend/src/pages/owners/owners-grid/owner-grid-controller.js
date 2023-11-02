@@ -38,7 +38,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     try {
       setRowData([])
       const { data } = await handleGetDetails();
-      if (data.data.length > 0) {
+      if (data.data.length >= 0) {
         setRowData(data.data);
         setOwner(true)
       } else {

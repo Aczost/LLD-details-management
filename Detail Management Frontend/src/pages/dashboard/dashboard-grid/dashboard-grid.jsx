@@ -20,18 +20,19 @@ const DashboardGrid = () => {
   const [moduleStartValue, setModuleStartValue] = useState("");
   const [fetch, setFetch] = useState(false);
   const [form] = Form.useForm();
-  const { gridColumnDefs, handleCancel, handleStartEndModalBtn, startAndEndModalDisplayField, jobWorkerDetails, handleOtpChange, handleGetOtp, handleJobSection } = useDashboarsGridController(prefix, setFetch,);
-
+  const [checkSection, setCheckSection] = useState({sectionButtonName: '', sectionTitleName:'', sectionValueFrom: ''});
+  const [val, setVal] = useState({});
+  const { gridColumnDefs, handleCancel, handleStartEndModalBtn, startAndEndModalDisplayField, jobWorkerDetails, handleOtpChange, handleGetOtp, handleJobSection } = useDashboarsGridController(prefix, setFetch, checkSection, val, setVal);
   useEffect(() => {
     setOwner(false);
     const userInfo = Cookies.get('userInfo');
     const expirationTime = Cookies.get("expirationTime");
     if (userInfo && expirationTime && atob(userInfo) === 'Link Leaser Die User' && Number(expirationTime) >= Date.now()) {
       setIsOtpValid(true);
-    } 
+    }
   }, []);
 
-  
+
   useEffect(() => {
     setPrifix(columnHeaderName.split(" ")[0]);
     form.resetFields();
@@ -197,8 +198,12 @@ const DashboardGrid = () => {
                             placeholder={`Select ${sectionDetails.title} By`}
                             onSelect={async (val) => {
                               setSectionValue(val);
+                              setVal({ [sectionDetails.title.toLocaleLowerCase()]: val });
+                              setCheckSection({
+                                sectionButtonName: sectionDetails.button,
+                                sectionTitleName: sectionDetails.title,
+                              });
                             }}
-                            // onChange={(e)=>console.log('onchange value', e)}
                             style={{ width: '170px' }}
                           >
                             {sectionDetails.title
@@ -240,6 +245,7 @@ const DashboardGrid = () => {
                       ) : clickedCellData[`${sectionDetails.title.charAt(0).toLowerCase() + sectionDetails.title.slice(1)}StartedAt`] ? (
                         <>
                           <Button
+                            name={`${sectionDetails.button}`}
                             type="primary"
                             danger
                             onClick={() => handleJobSection(`${sectionDetails.title.charAt(0).toLowerCase() + sectionDetails.title.slice(1)}`, sectionValue, clickedCellData[`${sectionDetails.title.charAt(0).toLowerCase() + sectionDetails.title.slice(1)}By`])}
@@ -250,6 +256,7 @@ const DashboardGrid = () => {
 
                       ) : (
                         <Button type="primary"
+                            name={`${sectionDetails.button}`}
                           onClick={() => handleJobSection(`${sectionDetails.title.charAt(0).toLowerCase() + sectionDetails.title.slice(1)}`, sectionValue, clickedCellData[`${sectionDetails.title.charAt(0).toLowerCase() + sectionDetails.title.slice(1)}By`])}
                         >
                           Start
