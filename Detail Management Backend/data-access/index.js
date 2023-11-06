@@ -10,17 +10,23 @@ const mysql = mysql2.createPool({
 }).promise();
 
 
-mongoose.connect(config.mongoDb.host, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+// mongoose.connect(config.mongoDb.host, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
 
+// const db = mongoose.connection;
+
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// db.once('open', function () {
+//     console.log('Connected to MongoDB');
+// });
+
+mongoose.connect(config.mongoDb.host);
 const db = mongoose.connection;
+db.on('error', err => console.log("Error",err))
+db.once('open',()=>console.info('Connected to the database!!'));
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', function () {
-    console.log('Connected to MongoDB');
-});
 
 const makeDetailsDb = require('./detailsDb')
 const detailsDb = makeDetailsDb({mysql})
