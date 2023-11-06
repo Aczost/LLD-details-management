@@ -1,4 +1,3 @@
-require('dotenv').config();
 const mysql2 = require("mysql2")
 const config = require("../config")
 const mongoose = require('mongoose');
