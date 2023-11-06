@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mysql2 = require("mysql2")
 const config = require("../config")
 const mongoose = require('mongoose');
@@ -10,7 +11,7 @@ const mysql = mysql2.createPool({
     database: config.mysql.database
 }).promise();
 
-mongoose.connect(config.mongoDb.host, {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

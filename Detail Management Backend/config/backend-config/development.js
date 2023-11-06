@@ -18,7 +18,7 @@ const config = {
         username: 'Amit',
         password: 'tXJofec4Zi2BNR7U',
         database: 'details_management',
-        host: 'mongodb+srv://Amit:tXJofec4Zi2BNR7U@cluster0.d9aitoq.mongodb.net/'
+        host: 'mongodb+srv://Amit:tXJofec4Zi2BNR7U@cluster0.d9aitoq.mongodb.net/test?retryWrites=true&w=majority'
     }
 }
 module.exports = config;   
