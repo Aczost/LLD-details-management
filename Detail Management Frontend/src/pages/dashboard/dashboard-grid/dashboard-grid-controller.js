@@ -6,9 +6,8 @@ import { useAppStore } from "../../../store/store";
 import moment from "moment-timezone";
 import handleCookies from "../../../api/authentication/login";
 
-const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVal) => {
-  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, setIsOtpValid, otpValue, setOtpValue, setOtpValueFromApi, otpValueFromApi, setOwner, owner } = useAppStore();
-  // console.log('otp from api', otpValueFromApi);
+const useDashboarsGridController = (prefix, checkSection, value, setVal) => {
+  const { setRowData, jobStatus, setIsModalOpen, clickedCellData, setShowRowData, setIsStartEndModal, setSectionValue, setOwner } = useAppStore();
   const getDetails = async () => {
     try {
       setRowData([])
@@ -203,26 +202,6 @@ const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVa
 
   ];
 
-  const handleGetOtp = async () => {
-    setFetch(true)
-    const response = await handleGetOtpCall();
-    handleCookies();
-    setOtpValueFromApi(response.data.data);
-    setFetch(false)
-    message.info('OTP sent to your email.')
-  }
-
-  const handleOtpChange = (e) => {
-    const userEnteredOtp = e.target.value;
-    setOtpValue(userEnteredOtp);
-    if (otpValueFromApi === userEnteredOtp) {
-      setIsOtpValid(true);
-    }
-    if (userEnteredOtp.length === 4 && (otpValueFromApi !== userEnteredOtp)) {
-      message.error('Invalid OTP please try again.')
-    }
-  };
-
   const handleJobSection = async (sectionName, sectionValue, sectionPerformBy,) => {
     if ((clickedCellData[`${sectionName}StartedAt`] || (checkSection.sectionButtonName.toLowerCase() === sectionName || !sectionValue)) ) {
       if (clickedCellData.startedAt) {
@@ -267,8 +246,6 @@ const useDashboarsGridController = (prefix, setFetch, checkSection, value, setVa
     handleOk,
     getDetails,
     handleStartEndModalBtn,
-    handleOtpChange,
-    handleGetOtp,
     handleJobSection,
     gridColumnDefs,
     modalDisplayFields,

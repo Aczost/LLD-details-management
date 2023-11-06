@@ -1,15 +1,11 @@
 import { useRef, useEffect, useMemo } from "react";
-
-import {
-  handleDragDrop,
-  handleEditDetail,
-  handleGetDetails,
-} from "../../api/details-managment-api";
+import { handleDragDrop, handleGetDetails } from "../../api/details-managment-api";
 import { useAppStore } from "../../store/store";
 
 const useTableController = () => {
-  const { setRowData, owner, setIsModalOpen, setClickedCellData, setColumnHeaderName , setShowRowData } = useAppStore()
+  const { setRowData, owner, setIsModalOpen, setClickedCellData, setColumnHeaderName, setShowRowData } = useAppStore()
   const gridApiRef = useRef(null);
+
   useEffect(() => {
     getDetails(); // Fetch data initially
     const intervalId = setInterval(() => {
@@ -60,11 +56,11 @@ const useTableController = () => {
 
   const onCellClicked = async (event) => {
     setIsModalOpen(false);
-    if(event.colDef.headerName==="START-END" ) {
+    if (event.colDef.headerName === "START-END") {
       setColumnHeaderName(event.colDef.headerName)
       setClickedCellData(event.data);
     }
-    if (event.colDef.headerName==="DELIVERY BY"||event.colDef.headerName === "DESIGN BY" || event.colDef.headerName === "LASER BY" || event.colDef.headerName === "BENDER BY" || event.colDef.headerName === "FITTING BY" || event.colDef.headerName === "CREASING BY") {
+    if (event.colDef.headerName === "DELIVERY BY" || event.colDef.headerName === "DESIGN BY" || event.colDef.headerName === "LASER BY" || event.colDef.headerName === "BENDER BY" || event.colDef.headerName === "FITTING BY" || event.colDef.headerName === "CREASING BY") {
       setColumnHeaderName(event.colDef.headerName)
       setClickedCellData(event.data);
       setIsModalOpen(true)
@@ -77,15 +73,15 @@ const useTableController = () => {
   }
 
   const noRowOverLay = () => {
-      return '<span><img src="https://ag-grid.com/images/ag-grid-loading-spinner.svg " width="150px"  alt="Loading Spinner" /></span>'
+    return '<span><img src="https://ag-grid.com/images/ag-grid-loading-spinner.svg " width="150px"  alt="Loading Spinner" /></span>'
   }
 
   return {
     handleRowDragEnd,
     onGridReady,
-    defaultColDef,
     onCellClicked,
-    noRowOverLay
+    noRowOverLay,
+    defaultColDef,
   }
 }
 

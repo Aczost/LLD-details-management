@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_ROUTES } from '../utils/enums.js';
+
 const handleCreateDetail = async (data) => {
   const response = await axios.post(`${API_ROUTES.POST_DETAILS}`, data);
   return response;

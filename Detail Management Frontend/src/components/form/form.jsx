@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+
 import {useAppStore} from "../../store/store";
 import {Form, Input, Select, Button, message as Message} from "antd";
 import {handleCreateDetail, handleGetDetails} from "../../api/details-managment-api";
@@ -54,7 +55,7 @@ const ContactForm = () => {
   };
 
   const handleSelect = (value) => {
-    setInputValue(""); // Clear the input value when an option is selected
+    setInputValue("");
   };
 
   return (
@@ -185,7 +186,6 @@ const ContactForm = () => {
           ))}
         </Select>
       </Form.Item>
-      
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
@@ -194,4 +194,5 @@ const ContactForm = () => {
     </Form>
   );
 };
+
 export default ContactForm;

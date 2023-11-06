@@ -7,14 +7,18 @@ import {
   Select,
 } from "antd";
 import {useAppStore} from "../../../store/store";
+import { useNavigate } from "react-router-dom";
 import {PARTY, PLYWOOD, CUTTING, CREASING} from "../../../utils/enums";
 
+import Cookies from "js-cookie";
 import AgGridTable from "../../../components/table/table";
 import useOwnerGridController from './owner-grid-controller.js'
 
 const {Option} = Select;
 
 const OwnersGrid = () => {
+
+  const navigate  = useNavigate();
   const {setOwner, isModalOpen} = useAppStore();
   const [form] = Form.useForm();
   const [isModaInputEmpty, setIsModalInputEmpty] = useState(false);
@@ -27,6 +31,11 @@ const OwnersGrid = () => {
 
   useEffect(() => {
     setOwner(true);
+    const userInfo = Cookies.get('userInfo');
+    const expirationTime = Cookies.get("expirationTime");
+    if (!(userInfo && expirationTime && atob(userInfo) === 'Link Leaser Die User' && Number(expirationTime) >= Date.now())) {
+      navigate('/');
+    }
   }, []);
 
   return (

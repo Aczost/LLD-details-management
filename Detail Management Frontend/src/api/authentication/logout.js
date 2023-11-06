@@ -1,11 +1,11 @@
 import Cookies from "js-cookie";
 
-const deleteCookie = () => {
+const deleteCookie = (navigate) => {
   try {
     Cookies.remove('expirationTime');
     Cookies.remove('isLogin');
     Cookies.remove('userInfo');
-    window.location.reload();
+    navigate('/');  
   } catch (error) {
     console.log(`Error deleting cookie:`, error);
   }

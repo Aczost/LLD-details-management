@@ -1,8 +1,9 @@
 import React from "react";
 import Toggle from "../toggle/toggle";
 import image from "../../assets/LINK_LASER_DIE-removebg-preview.png";
-import { useAppStore } from "../../store/store";
 import Logout from "../logout/logout";
+
+import { useAppStore } from "../../store/store";
 
 const Navbar = () => {
 	const { owner } = useAppStore()
@@ -27,12 +28,15 @@ const Navbar = () => {
 				minWidth: '140px',
 			}}>
 
+
 				<div>
-					<Toggle />
+					{
+						owner && owner ? null : <Toggle />
+					}
 				</div>
-				{owner && owner ? null : <div>
+				<div>
 					<Logout />
-				</div>}
+				</div>
 			</div>
 		</div>
 	);

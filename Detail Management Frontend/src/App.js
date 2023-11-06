@@ -6,16 +6,18 @@ import Owners from './pages/owners/owners';
 import Dashboard from './pages/dashboard/dashboard';
 import Footer from './components/footer/footer';
 import Navbar from './components/navbar/navbar';
+import Login from './pages/login/login';
 
 function App() {
   return (
     <div className="App">
       <Space direction="vertical" style={{width: '100%'}} size={[0, 48]}>
         <Layout>
-          <Navbar />
-          <Divider style={{marginTop: '0px'}}/>
+          {/* <Navbar />
+          <Divider style={{marginTop: '0px'}}/> */}
           <Routes>
-            <Route path='/' element={<Dashboard />} />
+            <Route path='/' element={<Login />} />
+            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/owners' element={<Owners />} />
           </Routes>
           <Footer />

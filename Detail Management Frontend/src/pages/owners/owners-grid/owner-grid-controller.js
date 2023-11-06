@@ -53,11 +53,10 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
       if (jobDelete) {
         await handleDeleteDetail(val.id);
         await getDetails();
+        message.success("Deleted Successfully!");
       } else {
-
       }
     } catch (error) { }
-    message.success("Deleted Successfully!");
   };
 
   const columnDefs = useMemo(
