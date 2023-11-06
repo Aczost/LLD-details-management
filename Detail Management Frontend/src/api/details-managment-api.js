@@ -31,8 +31,7 @@ const handleTaskStatus = async (data, id) => {
   return response;
 }
 
-// to do change name 
-const handleStartEndAndDuration = async (data, id) => {
+const handleUpdateJobDetails = async (data, id) => {
   const response = await axios.put(`${API_ROUTES.UPDATE_START_END_DURATION}/${id}`, data);
   return response
 }
@@ -41,4 +40,4 @@ const handleGetOtpCall = async () => {
   return await axios.get(`${API_ROUTES.GET_OTP}`);
 
 }
-export { handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus, handleStartEndAndDuration, handleGetOtpCall }
+export { handleCreateDetail, handleGetDetails, handleEditDetail, handleDeleteDetail, handleDragDrop, handleTaskStatus, handleUpdateJobDetails, handleGetOtpCall }

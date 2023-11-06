@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Button, message } from "antd";
-import { handleGetDetails, handleStartEndAndDuration as updateJobDetails, handleGetOtpCall } from "../../../api/details-managment-api";
+import { handleGetDetails, handleUpdateJobDetails, handleGetOtpCall } from "../../../api/details-managment-api";
 import { useAppStore } from "../../../store/store";
 
 import moment from "moment-timezone";
@@ -33,7 +33,7 @@ const useDashboarsGridController = (prefix, checkSection, value, setVal) => {
           .format("dddd DD-MM-YYYY hh:mm:ss A"),
         inProcess: true,
       };
-      await updateJobDetails(data, val.id);
+      await handleUpdateJobDetails(data, val._id);
       setIsStartEndModal(false);
       await getDetails();
       setSectionValue('')
@@ -56,7 +56,7 @@ const useDashboarsGridController = (prefix, checkSection, value, setVal) => {
           .format("dddd DD-MM-YYYY hh:mm:ss A"),
         duration: `${days}D, ${hours}H, ${minutes}M, ${seconds}S`,
       };
-      await updateJobDetails(data, val.id);
+      await handleUpdateJobDetails(data, val._id);
       setIsStartEndModal(false);
       await getDetails();
       setSectionValue('')
@@ -225,7 +225,7 @@ const useDashboarsGridController = (prefix, checkSection, value, setVal) => {
           message.error(`Please select ${sectionName} by`);
         }
 
-        await updateJobDetails(data, clickedCellData.id);
+        await handleUpdateJobDetails(data, clickedCellData._id);
         await getDetails();
         setSectionValue("");
       } else {
