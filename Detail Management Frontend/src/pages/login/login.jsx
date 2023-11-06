@@ -14,7 +14,7 @@ const Login = () => {
       <Form
         className='login'
         name="login-form"
-        initialValues={{ email: 'email@example.com' }}
+        initialValues={{ email: 'linkdiesotp44@gmail.com' }}
         onFinish={(loginFormValues) => handleOtpSubmit(loginFormValues)}
       >
         <div>

@@ -51,7 +51,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
     try {
       let jobDelete = window.confirm("Are you sure you want to delete this job?");
       if (jobDelete) {
-        await handleDeleteDetail(val.id);
+        await handleDeleteDetail(val._id);
         await getDetails();
         message.success("Deleted Successfully!");
       } else {
@@ -152,7 +152,7 @@ const useOwnerGridController = (form, setIsModalInputEmpty, setInputValue) => {
       plywood: Array.isArray(value.plywood) ? value.plywood[0] : value.plywood,
     };
     try {
-      await handleEditDetail(data, clickedCellData.id);
+      await handleEditDetail(data, clickedCellData._id);
       await getDetails();
       form.resetFields();
       setIsModalInputEmpty(false);

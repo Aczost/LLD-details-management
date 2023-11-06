@@ -9,7 +9,7 @@ const useLoginController = (setFetch) => {
 
   const navigate  = useNavigate();
   const { setOtpValueFromApi, otpValueFromApi,  } = useAppStore();
-  // console.log('otp value api', otpValueFromApi);
+  console.log('otp value api', otpValueFromApi);
 
   const handleGetOtp = async () => {
     setFetch(true)
