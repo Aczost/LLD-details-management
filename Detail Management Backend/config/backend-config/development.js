@@ -6,7 +6,7 @@ const config = {
         "host": "ba2t3wgcrrho9ygrlaxa-mysql.services.clever-cloud.com",
         "dialect": "mysql",
         "port": "3306"
-    }
+    },
     // "mysql": {
     //     "username": "root",
     //     "password": "root",
@@ -14,5 +14,11 @@ const config = {
     //     "host": "127.0.0.1",
     //     "dialect": "mysql"
     // }
+    "mongoDb": {
+        username: 'Amit',
+        password: 'tXJofec4Zi2BNR7U',
+        database: 'details_management',
+        host: 'mongodb+srv://Amit:tXJofec4Zi2BNR7U@cluster0.d9aitoq.mongodb.net/'
+    }
 }
 module.exports = config;   
