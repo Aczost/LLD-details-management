@@ -1,0 +1,30 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  border: '1px solid black';
+}
+
+/* Optional: Add some styles to your form */
+.login {
+  /* max-width: 400px; */
+  width: 25%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Center align the form items */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 5%;
+}
+
+/* Optional: Style the buttons */
+.form-btn {
+  margin-top: 15px;
+  margin-right: 16px;
+}
