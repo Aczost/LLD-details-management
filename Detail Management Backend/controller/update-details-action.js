@@ -24,7 +24,7 @@ module.exports = function makeUpdateDetailsAction({Joi, updateDetails}){
 
     function validateInput({id}){
         const schema = Joi.object({
-            id: Joi.number().integer().required()
+            id: Joi.string().required()
         })
         return schema.validate({id})
     }

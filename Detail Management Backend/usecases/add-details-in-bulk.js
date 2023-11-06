@@ -1,8 +1,9 @@
-module.exports = function makeAddDetailsInBulk({ detailsDb }) {
+module.exports = function makeAddDetailsInBulk({ detailsDb, detailsDbInMongo }) {
     return async function addDetailsInBulk({ arrayToInsert }) {
         try {
             const resultArr = []
-            await detailsDb.deleteAllDetailsFromDataBase({})
+            // await detailsDb.deleteAllDetailsFromDataBase({})
+            await detailsDbInMongo.deleteAllDetailsFromMongoDB({})
             for (let item of arrayToInsert){
                 let createObj = {
                     name: item.name,
@@ -15,7 +16,8 @@ module.exports = function makeAddDetailsInBulk({ detailsDb }) {
                     pickedBy: item.pickedBy,
                     startedAt: item.startedAt,
                 }
-                const result = await detailsDb.createBulkDetailsInDataBase({createObj});
+                // const result = await detailsDb.createBulkDetailsInDataBase({createObj});
+                const result = await detailsDbInMongo.createBulkDetailsInMongoDB({createObj});
                 resultArr.push(result)
             }
             if(resultArr.length){

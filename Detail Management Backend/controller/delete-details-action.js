@@ -28,7 +28,7 @@ module.exports = function makeDeleteDetailsAction({Joi, deleteDetails}){
 
     function validateInput({id}){
         const schema = Joi.object({
-            id: Joi.number().integer().required()
+            id: Joi.string().required()
         })
         return schema.validate({id})
     }
