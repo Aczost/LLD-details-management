@@ -16,6 +16,7 @@ const useLoginController = (setFetch) => {
     const response = await handleGetOtpCall();
     handleCookies();
     setOtpValueFromApi(response.data.data);
+    // setOtpValueFromApi('1234');
     setFetch(false)
     message.info('OTP sent to your email.')
   }

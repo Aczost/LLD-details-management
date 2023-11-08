@@ -12,7 +12,7 @@ module.exports = function makeDetailsDbInMongo({ db, DetailsModel }) {
     });
 
     async function createBulkDetailsInMongoDB({createObj}) {
-        const result = await DetailsModel.insertMany(createObj);
+        const result = await DetailsModel.create(createObj);
         return result;
     }
 
